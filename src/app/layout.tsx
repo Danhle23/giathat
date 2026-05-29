@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { Logo } from "@/components/Logo";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { DealToasts } from "@/components/DealToasts";
+import { getFakeDeals, getRealDeals } from "@/lib/repository";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -33,9 +36,20 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const toastItems = [
+    ...getFakeDeals().map((p) => ({ id: p.id, name: p.name, type: "FAKE" as const, drop: 0 })),
+    ...getRealDeals().map((r) => ({
+      id: r.product.id,
+      name: r.product.name,
+      type: "REAL" as const,
+      drop: Math.round(r.realDiscount * 100),
+    })),
+  ];
+
   return (
     <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col text-slate-800">
+        <ScrollProgress />
         <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/75 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
             <Link href="/" aria-label="Giá Thật — trang chủ">
@@ -72,6 +86,8 @@ export default function RootLayout({
             </p>
           </div>
         </footer>
+
+        <DealToasts items={toastItems} />
       </body>
     </html>
   );

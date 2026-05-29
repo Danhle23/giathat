@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
+import { Tilt } from "@/components/Tilt";
 import { searchProducts } from "@/lib/repository";
 
 export const metadata: Metadata = {
@@ -39,7 +40,9 @@ export default async function SearchPage({
       ) : (
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {results.map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <Tilt key={p.id}>
+              <ProductCard product={p} />
+            </Tilt>
           ))}
         </div>
       )}

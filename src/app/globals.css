@@ -115,6 +115,15 @@ body {
   animation: draw-line 1s ease-out 0.2s forwards;
 }
 
+/* ---------- toast pop-in ---------- */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.toast-in {
+  animation: toast-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* ---------- card sheen on hover ---------- */
 .card-sheen::before {
   content: "";
@@ -137,7 +146,7 @@ body {
     animation: none !important;
   }
   .animate-float-slow, .animate-float-slow-2, .animate-float-slow-3,
-  .animate-gradient-pan, .animate-marquee, .scan-line, .verdict-pop {
+  .animate-gradient-pan, .animate-marquee, .scan-line, .verdict-pop, .toast-in {
     animation: none !important;
   }
 }

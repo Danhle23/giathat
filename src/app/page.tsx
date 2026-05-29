@@ -7,6 +7,7 @@ import { Odometer } from "@/components/Odometer";
 import { DetectorDemo } from "@/components/DetectorDemo";
 import { DealTicker } from "@/components/DealTicker";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
+import { Tilt } from "@/components/Tilt";
 import { getAllProducts, getRealDeals, getFakeDeals } from "@/lib/repository";
 import { computeStats } from "@/lib/pricing";
 
@@ -71,7 +72,9 @@ export default function HomePage() {
 
           {/* Right: live price detector */}
           <div className="flex justify-center lg:justify-end">
-            <DetectorDemo />
+            <Tilt max={6}>
+              <DetectorDemo />
+            </Tilt>
           </div>
         </div>
       </section>
@@ -98,7 +101,9 @@ export default function HomePage() {
           >
             <Grid>
               {fakeDeals.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <Tilt key={p.id}>
+                  <ProductCard product={p} />
+                </Tilt>
               ))}
             </Grid>
           </Section>
@@ -112,7 +117,9 @@ export default function HomePage() {
           >
             <Grid>
               {realDeals.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <Tilt key={p.id}>
+                  <ProductCard product={p} />
+                </Tilt>
               ))}
             </Grid>
           </Section>
