@@ -59,7 +59,7 @@ export default async function ArticlePage({
         <span className="text-slate-500">{article.emoji}</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold leading-tight text-slate-900">{article.title}</h1>
+      <h1 className="font-display text-4xl font-bold leading-tight text-slate-900">{article.title}</h1>
       <p className="mt-2 text-sm text-slate-400">
         {viDate(article.date)} · {article.readMins} phút đọc
       </p>

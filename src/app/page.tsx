@@ -42,9 +42,9 @@ export default function HomePage() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ee4d2d]" />
               Bắt giảm giá ảo · Săn deal thật trên Shopee
             </span>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+            <h1 className="font-display mt-5 text-5xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-6xl">
               Giảm 50%…{" "}
-              <span className="animate-gradient-pan bg-gradient-to-r from-[#ee4d2d] via-amber-500 to-[#ee4d2d] bg-clip-text text-transparent">
+              <span className="animate-gradient-pan bg-gradient-to-r from-[#ee4d2d] via-amber-500 to-[#ee4d2d] bg-clip-text italic text-transparent">
                 hay giá cũ đội lên?
               </span>
             </h1>
@@ -145,7 +145,7 @@ export default function HomePage() {
         {/* How it works */}
         <Reveal>
           <section className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <h2 className="text-center text-xl font-bold text-slate-900">Cách hoạt động</h2>
+            <h2 className="font-display text-center text-2xl font-bold text-slate-900">Cách hoạt động</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
               {[
                 { icon: "🔗", title: "Dán link Shopee", desc: "Thêm sản phẩm bạn quan tâm để theo dõi." },
@@ -211,7 +211,7 @@ function Section({
       <div className="mb-5 flex items-start gap-3">
         <span className={`mt-1 h-7 w-1.5 rounded-full ${accent}`} />
         <div>
-          <h2 className="text-xl font-bold text-slate-900">{title}</h2>
+          <h2 className="font-display text-2xl font-bold text-slate-900">{title}</h2>
           <p className="text-sm text-slate-500">{subtitle}</p>
         </div>
       </div>

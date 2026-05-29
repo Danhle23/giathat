@@ -26,7 +26,7 @@ export default async function SearchPage({
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#ee4d2d]/10 blur-3xl" />
         </div>
         <div className="mx-auto max-w-2xl px-4 py-12 text-center">
-          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Tra giá thật mọi sản phẩm Shopee
           </h1>
           <p className="mt-2 text-slate-500">

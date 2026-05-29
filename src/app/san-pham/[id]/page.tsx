@@ -106,7 +106,7 @@ export default async function ProductPage({
               />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900">{product.name}</h1>
+              <h1 className="font-display text-2xl font-bold text-slate-900">{product.name}</h1>
               <p className="mt-1 text-sm text-slate-500">{product.shop}</p>
               <p className="mt-1 text-xs text-slate-400">
                 ⭐ {product.rating.toFixed(1)} · Đã bán {compact(product.sold)}

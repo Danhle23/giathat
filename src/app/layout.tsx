@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Be_Vietnam_Pro } from "next/font/google";
+import { Be_Vietnam_Pro, Playfair_Display } from "next/font/google";
 import { Logo } from "@/components/Logo";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { DealToasts } from "@/components/DealToasts";
@@ -14,6 +14,13 @@ const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
   subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin", "vietnamese"],
+  weight: ["600", "700", "800"],
+  style: ["normal", "italic"],
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -50,7 +57,7 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
+    <html lang="vi" className={`${beVietnam.variable} ${playfair.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col text-slate-800">
         <ScrollProgress />
         <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/75 backdrop-blur-md">

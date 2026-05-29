@@ -26,7 +26,7 @@ export default function TrackPage() {
           <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ee4d2d]/20 bg-white/70 px-3 py-1 text-xs font-semibold text-[#ee4d2d] backdrop-blur">
             🔔 Cảnh báo giảm giá thật
           </span>
-          <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+          <h1 className="font-display mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Theo dõi giá sản phẩm bạn muốn mua
           </h1>
           <p className="mx-auto mt-2 max-w-lg text-slate-500">
