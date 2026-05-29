@@ -73,6 +73,19 @@ Sao chép `.env.example` thành `.env.local` và điền cấu hình.
 - **Bot deal Telegram/Zalo:** đẩy deal thật mỗi ngày (roadmap).
 - **Extension trình duyệt:** xem lịch sử giá ngay trên trang Shopee (roadmap).
 
+## 🤖 Bot Telegram (tự đăng deal)
+
+Tự động đăng deal thật lên channel Telegram mỗi ngày (ảnh thẻ deal + nút mua affiliate).
+
+1. Chat **@BotFather** → `/newbot` → lấy **bot token**.
+2. Tạo **channel**, thêm bot làm **admin** (quyền đăng bài).
+3. Lấy **chat id**: dùng `@username` của channel, hoặc id dạng `-100...`.
+4. Đặt env: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `CRON_SECRET`, `NEXT_PUBLIC_SITE_URL`.
+5. Test thủ công: mở `https://<domain>/api/cron/telegram?secret=<CRON_SECRET>`.
+
+Lịch chạy hằng ngày được khai báo trong `vercel.json` (Vercel Cron). Mỗi link gắn
+sub-id `telegram` để đo đơn về từ kênh này.
+
 ## 🚀 Deploy
 
 Đẩy lên GitHub rồi import vào **Vercel** (đặt biến `NEXT_PUBLIC_SITE_URL`, `SHOPEE_AFFILIATE_ID`).
