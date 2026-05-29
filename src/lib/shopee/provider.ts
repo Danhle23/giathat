@@ -1,5 +1,6 @@
 import type { Product } from "../types";
 import { getAllProducts, getProduct, searchProducts } from "../repository";
+import { AFFILIATE_LINKS } from "../affiliate-links";
 
 /**
  * Adapter boundary between Giá Thật and Shopee.
@@ -31,9 +32,13 @@ class MockShopeeProvider implements ShopeeProvider {
     return searchProducts(query);
   }
   affiliateLink(product: Product, subId = "web") {
-    // Mirrors the shape of a real Shopee affiliate short link: deep link to the
-    // product carrying the affiliate id + sub-ids used to attribute commission.
-    // Using URL keeps it valid even when product.url already has a query string.
+    // 1) If a REAL Shopee affiliate short link is configured, use it directly —
+    //    it already carries your affiliate id, so clicks earn commission.
+    const real = AFFILIATE_LINKS[product.id];
+    if (real) return real;
+
+    // 2) Fallback (no commission): a Shopee search link with UTM/sub-ids,
+    //    valid even when product.url already has a query string.
     const url = new URL(product.url);
     url.searchParams.set("utm_source", "affiliates");
     url.searchParams.set("utm_medium", "giathat");
