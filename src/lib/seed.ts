@@ -97,7 +97,10 @@ function build(spec: Spec): Product {
     name: spec.name,
     category: spec.category,
     shop: spec.shop,
-    url: `https://shopee.vn/product/${shopId}/${itemId}`,
+    // Mock catalog: link to a real Shopee search for the product name so the
+    // "Mua" button lands on genuine listings. The real version replaces this
+    // with a per-product affiliate deep link from the Shopee Affiliate API.
+    url: `https://shopee.vn/search?keyword=${encodeURIComponent(spec.name)}`,
     listedPrice,
     currentPrice,
     rating: spec.rating,

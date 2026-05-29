@@ -33,14 +33,14 @@ class MockShopeeProvider implements ShopeeProvider {
   affiliateLink(product: Product, subId = "web") {
     // Mirrors the shape of a real Shopee affiliate short link: deep link to the
     // product carrying the affiliate id + sub-ids used to attribute commission.
-    const params = new URLSearchParams({
-      utm_source: "affiliates",
-      utm_medium: "giathat",
-      utm_campaign: AFFILIATE_ID,
-      af_sub1: subId,
-      af_sub2: product.id,
-    });
-    return `${product.url}?${params.toString()}`;
+    // Using URL keeps it valid even when product.url already has a query string.
+    const url = new URL(product.url);
+    url.searchParams.set("utm_source", "affiliates");
+    url.searchParams.set("utm_medium", "giathat");
+    url.searchParams.set("utm_campaign", AFFILIATE_ID);
+    url.searchParams.set("af_sub1", subId);
+    url.searchParams.set("af_sub2", product.id);
+    return url.toString();
   }
 }
 
