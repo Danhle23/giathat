@@ -3,6 +3,8 @@ import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { DetectorDemo } from "@/components/DetectorDemo";
+import { DealTicker } from "@/components/DealTicker";
 import { getAllProducts, getRealDeals, getFakeDeals } from "@/lib/repository";
 
 const CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
@@ -18,44 +20,55 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200/70">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="dot-grid absolute inset-0 opacity-60" />
+          <div className="dot-grid absolute inset-0 opacity-50" />
           <div className="animate-float-slow absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#ee4d2d]/15 blur-3xl" />
-          <div className="animate-float-slow-2 absolute -left-20 top-10 h-72 w-72 rounded-full bg-amber-300/20 blur-3xl" />
+          <div className="animate-float-slow-2 absolute -left-24 top-10 h-72 w-72 rounded-full bg-amber-300/25 blur-3xl" />
+          <div className="animate-float-slow-3 absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-rose-300/15 blur-3xl" />
         </div>
 
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:py-20">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ee4d2d]/20 bg-white/70 px-3 py-1 text-xs font-semibold text-[#ee4d2d] backdrop-blur">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ee4d2d]" />
-            Bắt giảm giá ảo · Săn deal thật trên Shopee
-          </span>
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
-            Giảm 50%…{" "}
-            <span className="animate-gradient-pan bg-gradient-to-r from-[#ee4d2d] via-amber-500 to-[#ee4d2d] bg-clip-text text-transparent">
-              hay giá cũ đội lên?
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2">
+          {/* Left: copy */}
+          <div className="text-center lg:text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ee4d2d]/20 bg-white/70 px-3 py-1 text-xs font-semibold text-[#ee4d2d] backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ee4d2d]" />
+              Bắt giảm giá ảo · Săn deal thật trên Shopee
             </span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 sm:text-lg">
-            Giá Thật lưu lịch sử giá Shopee để bạn biết đâu là <b>deal thật</b>,
-            đâu là <b>giảm giá ảo</b> — và báo ngay khi giá xuống thật sự.
-          </p>
+            <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+              Giảm 50%…{" "}
+              <span className="animate-gradient-pan bg-gradient-to-r from-[#ee4d2d] via-amber-500 to-[#ee4d2d] bg-clip-text text-transparent">
+                hay giá cũ đội lên?
+              </span>
+            </h1>
+            <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 sm:text-lg lg:mx-0">
+              Giá Thật lưu lịch sử giá Shopee để bạn biết đâu là <b>deal thật</b>,
+              đâu là <b>giảm giá ảo</b> — và báo ngay khi giá xuống thật sự.
+            </p>
 
-          <div className="mx-auto mt-7 max-w-xl">
-            <SearchBar />
+            <div className="mx-auto mt-7 max-w-xl lg:mx-0">
+              <SearchBar />
+            </div>
+
+            <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
+              {CATEGORIES.map((cat) => (
+                <Link
+                  key={cat}
+                  href={`/tim-kiem?q=${encodeURIComponent(cat)}`}
+                  className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur transition hover:border-[#ee4d2d]/40 hover:text-[#ee4d2d]"
+                >
+                  {cat}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap justify-center gap-2">
-            {CATEGORIES.map((cat) => (
-              <Link
-                key={cat}
-                href={`/tim-kiem?q=${encodeURIComponent(cat)}`}
-                className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur transition hover:border-[#ee4d2d]/40 hover:text-[#ee4d2d]"
-              >
-                {cat}
-              </Link>
-            ))}
+          {/* Right: live price detector */}
+          <div className="flex justify-center lg:justify-end">
+            <DetectorDemo />
           </div>
         </div>
       </section>
+
+      <DealTicker />
 
       {/* Animated stats band */}
       <div className="mx-auto max-w-4xl px-4">
