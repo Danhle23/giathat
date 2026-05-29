@@ -24,10 +24,70 @@ body {
   background-size: 18px 18px;
 }
 
+/* ---------- motion ---------- */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
 }
-.animate-float-slow {
-  animation: float-slow 9s ease-in-out infinite;
+.animate-float-slow { animation: float-slow 9s ease-in-out infinite; }
+
+@keyframes float-slow-2 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(12px) translateX(-10px); }
+}
+.animate-float-slow-2 { animation: float-slow-2 11s ease-in-out infinite; }
+
+/* animated gradient (used for the headline) */
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.animate-gradient-pan {
+  background-size: 200% 200%;
+  animation: gradient-pan 5s ease-in-out infinite alternate;
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.reveal.is-visible {
+  animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes reveal-up {
+  to { opacity: 1; transform: none; }
+}
+
+/* price chart self-drawing line (path must set pathLength="1") */
+.chart-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 1.5s ease-out 0.25s forwards;
+}
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+.chart-fade {
+  opacity: 0;
+  animation: fade-in 0.8s ease-out 1.1s forwards;
+}
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .chart-line,
+  .chart-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .animate-float-slow,
+  .animate-float-slow-2,
+  .animate-gradient-pan {
+    animation: none !important;
+  }
 }

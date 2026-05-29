@@ -68,11 +68,20 @@ export function PriceChart({
           Thấp nhất {vnd(min)}
         </text>
 
-        <path d={area} fill="url(#fill)" />
-        <path d={line} fill="none" stroke="#ee4d2d" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <path d={area} fill="url(#fill)" className="chart-fade" />
+        <path
+          d={line}
+          fill="none"
+          stroke="#ee4d2d"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          pathLength={1}
+          className="chart-line"
+        />
 
         {/* current price marker */}
-        <circle cx={lastX} cy={lastY} r="4" fill="#ee4d2d" stroke="#fff" strokeWidth="1.5" />
+        <circle cx={lastX} cy={lastY} r="4" fill="#ee4d2d" stroke="#fff" strokeWidth="1.5" className="chart-fade" />
       </svg>
       <figcaption className="mt-1 flex justify-between text-xs text-slate-400">
         <span>{viDate(history[0]?.date ?? "")}</span>
