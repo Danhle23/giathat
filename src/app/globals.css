@@ -26,6 +26,10 @@ body {
   background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
   background-size: 18px 18px;
 }
+.dot-grid-light {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
 
 /* ---------- ambient motion ---------- */
 @keyframes float-slow {

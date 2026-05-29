@@ -25,32 +25,32 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-slate-200/70">
+      {/* Hero — dark cinematic */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0b1020] via-[#141a2e] to-[#0b1020] text-white">
         <CursorSpotlight />
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="dot-grid absolute inset-0 opacity-50" />
-          <div className="animate-float-slow absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#ee4d2d]/15 blur-3xl" />
-          <div className="animate-float-slow-2 absolute -left-24 top-10 h-72 w-72 rounded-full bg-amber-300/25 blur-3xl" />
-          <div className="animate-float-slow-3 absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-rose-300/15 blur-3xl" />
+          <div className="dot-grid-light absolute inset-0 opacity-70" />
+          <div className="animate-float-slow absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#ee4d2d]/25 blur-3xl" />
+          <div className="animate-float-slow-2 absolute -left-24 top-10 h-80 w-80 rounded-full bg-amber-400/20 blur-3xl" />
+          <div className="animate-float-slow-3 absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-fuchsia-500/15 blur-3xl" />
         </div>
 
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:py-24 lg:grid-cols-2">
           {/* Left: copy */}
           <div className="text-center lg:text-left">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ee4d2d]/20 bg-white/70 px-3 py-1 text-xs font-semibold text-[#ee4d2d] backdrop-blur">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ee4d2d]" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-amber-300 backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-400" />
               Bắt giảm giá ảo · Săn deal thật trên Shopee
             </span>
-            <h1 className="font-display mt-5 text-5xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-6xl">
+            <h1 className="font-display mt-5 text-5xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl">
               Giảm 50%…{" "}
-              <span className="animate-gradient-pan bg-gradient-to-r from-[#ee4d2d] via-amber-500 to-[#ee4d2d] bg-clip-text italic text-transparent">
+              <span className="animate-gradient-pan bg-gradient-to-r from-[#ff7a45] via-amber-300 to-[#ff7a45] bg-clip-text italic text-transparent">
                 hay giá cũ đội lên?
               </span>
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 sm:text-lg lg:mx-0">
-              Giá Thật lưu lịch sử giá Shopee để bạn biết đâu là <b>deal thật</b>,
-              đâu là <b>giảm giá ảo</b> — và báo ngay khi giá xuống thật sự.
+            <p className="mx-auto mt-4 max-w-xl text-base text-slate-300 sm:text-lg lg:mx-0">
+              Giá Thật lưu lịch sử giá Shopee để bạn biết đâu là <b className="text-white">deal thật</b>,
+              đâu là <b className="text-white">giảm giá ảo</b> — và báo ngay khi giá xuống thật sự.
             </p>
 
             <div className="mx-auto mt-7 max-w-xl lg:mx-0">
@@ -62,7 +62,7 @@ export default function HomePage() {
                 <Link
                   key={cat}
                   href={`/tim-kiem?q=${encodeURIComponent(cat)}`}
-                  className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur transition hover:border-[#ee4d2d]/40 hover:text-[#ee4d2d]"
+                  className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur transition hover:border-[#ee4d2d] hover:text-white"
                 >
                   {cat}
                 </Link>
