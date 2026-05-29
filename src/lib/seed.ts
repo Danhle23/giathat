@@ -19,6 +19,7 @@ interface Spec {
   pattern: Pattern;
   rating: number;
   sold: number;
+  keywords: string; // for the stock product image
 }
 
 // Small deterministic PRNG so the catalog (and therefore the deals) is stable.
@@ -101,6 +102,9 @@ function build(spec: Spec): Product {
     // "Mua" button lands on genuine listings. The real version replaces this
     // with a per-product affiliate deep link from the Shopee Affiliate API.
     url: `https://shopee.vn/search?keyword=${encodeURIComponent(spec.name)}`,
+    // Keyword stock photo (stable via lock). Swap for the real Shopee image
+    // URL once the affiliate catalog API is connected.
+    image: `https://loremflickr.com/600/450/${spec.keywords}?lock=${hash(spec.id) % 1000}`,
     listedPrice,
     currentPrice,
     rating: spec.rating,
@@ -119,18 +123,18 @@ function hash(s: string): number {
 }
 
 const SPECS: Spec[] = [
-  { id: "tai-nghe-soundcore-r50i", name: "Tai nghe Bluetooth Soundcore R50i", category: "Điện tử", shop: "Anker Official", base: 790000, pattern: "real_deal", rating: 4.9, sold: 18200 },
-  { id: "sac-du-phong-anker-20000", name: "Sạc dự phòng Anker 20000mAh PowerCore", category: "Điện tử", shop: "Anker Official", base: 590000, pattern: "fake", rating: 4.8, sold: 9400 },
-  { id: "ban-phim-co-akko-3068", name: "Bàn phím cơ Akko 3068B Plus", category: "Điện tử", shop: "Akko Gaming", base: 1190000, pattern: "good", rating: 4.9, sold: 5600 },
-  { id: "chuot-logitech-mx-master-3s", name: "Chuột Logitech MX Master 3S", category: "Điện tử", shop: "Logitech VN", base: 2390000, pattern: "fake", rating: 4.9, sold: 7800 },
-  { id: "noi-chien-khong-dau-locklock-5l5", name: "Nồi chiên không dầu Lock&Lock 5.5L", category: "Gia dụng", shop: "Lock&Lock Official", base: 1490000, pattern: "fake", rating: 4.7, sold: 12300 },
-  { id: "robot-hut-bui-xiaomi-e10", name: "Robot hút bụi lau nhà Xiaomi E10", category: "Gia dụng", shop: "Xiaomi Official", base: 4990000, pattern: "real_deal", rating: 4.8, sold: 3100 },
-  { id: "ao-thun-nam-cotton-basic", name: "Áo thun nam cotton 100% form regular", category: "Thời trang", shop: "Coolmate", base: 159000, pattern: "normal", rating: 4.8, sold: 45200 },
-  { id: "giay-sneaker-nam-tr-01", name: "Giày sneaker nam thể thao TR-01", category: "Thời trang", shop: "Sport Store VN", base: 450000, pattern: "fake", rating: 4.5, sold: 6700 },
-  { id: "serum-vitamin-c-melano", name: "Serum Vitamin C Melano CC 20ml", category: "Làm đẹp", shop: "Hada Labo Official", base: 320000, pattern: "good", rating: 4.9, sold: 21800 },
-  { id: "kem-chong-nang-anessa", name: "Kem chống nắng Anessa Gold SPF50+", category: "Làm đẹp", shop: "Anessa Official", base: 520000, pattern: "real_deal", rating: 4.9, sold: 15400 },
-  { id: "bim-bobby-size-l", name: "Bỉm tã quần Bobby size L 56 miếng", category: "Mẹ & Bé", shop: "Bobby Official", base: 350000, pattern: "normal", rating: 4.8, sold: 33100 },
-  { id: "may-do-huyet-ap-omron-7121", name: "Máy đo huyết áp Omron HEM-7121", category: "Sức khỏe", shop: "Omron Healthcare", base: 890000, pattern: "good", rating: 4.9, sold: 8900 },
+  { id: "tai-nghe-soundcore-r50i", name: "Tai nghe Bluetooth Soundcore R50i", category: "Điện tử", shop: "Anker Official", base: 790000, pattern: "real_deal", rating: 4.9, sold: 18200, keywords: "headphones,earbuds" },
+  { id: "sac-du-phong-anker-20000", name: "Sạc dự phòng Anker 20000mAh PowerCore", category: "Điện tử", shop: "Anker Official", base: 590000, pattern: "fake", rating: 4.8, sold: 9400, keywords: "powerbank,charger" },
+  { id: "ban-phim-co-akko-3068", name: "Bàn phím cơ Akko 3068B Plus", category: "Điện tử", shop: "Akko Gaming", base: 1190000, pattern: "good", rating: 4.9, sold: 5600, keywords: "mechanical,keyboard" },
+  { id: "chuot-logitech-mx-master-3s", name: "Chuột Logitech MX Master 3S", category: "Điện tử", shop: "Logitech VN", base: 2390000, pattern: "fake", rating: 4.9, sold: 7800, keywords: "computer,mouse" },
+  { id: "noi-chien-khong-dau-locklock-5l5", name: "Nồi chiên không dầu Lock&Lock 5.5L", category: "Gia dụng", shop: "Lock&Lock Official", base: 1490000, pattern: "fake", rating: 4.7, sold: 12300, keywords: "airfryer,kitchen" },
+  { id: "robot-hut-bui-xiaomi-e10", name: "Robot hút bụi lau nhà Xiaomi E10", category: "Gia dụng", shop: "Xiaomi Official", base: 4990000, pattern: "real_deal", rating: 4.8, sold: 3100, keywords: "robot,vacuum" },
+  { id: "ao-thun-nam-cotton-basic", name: "Áo thun nam cotton 100% form regular", category: "Thời trang", shop: "Coolmate", base: 159000, pattern: "normal", rating: 4.8, sold: 45200, keywords: "tshirt,apparel" },
+  { id: "giay-sneaker-nam-tr-01", name: "Giày sneaker nam thể thao TR-01", category: "Thời trang", shop: "Sport Store VN", base: 450000, pattern: "fake", rating: 4.5, sold: 6700, keywords: "sneakers,shoes" },
+  { id: "serum-vitamin-c-melano", name: "Serum Vitamin C Melano CC 20ml", category: "Làm đẹp", shop: "Hada Labo Official", base: 320000, pattern: "good", rating: 4.9, sold: 21800, keywords: "serum,cosmetics" },
+  { id: "kem-chong-nang-anessa", name: "Kem chống nắng Anessa Gold SPF50+", category: "Làm đẹp", shop: "Anessa Official", base: 520000, pattern: "real_deal", rating: 4.9, sold: 15400, keywords: "sunscreen,skincare" },
+  { id: "bim-bobby-size-l", name: "Bỉm tã quần Bobby size L 56 miếng", category: "Mẹ & Bé", shop: "Bobby Official", base: 350000, pattern: "normal", rating: 4.8, sold: 33100, keywords: "diapers,baby" },
+  { id: "may-do-huyet-ap-omron-7121", name: "Máy đo huyết áp Omron HEM-7121", category: "Sức khỏe", shop: "Omron Healthcare", base: 890000, pattern: "good", rating: 4.9, sold: 8900, keywords: "blood-pressure,medical" },
 ];
 
 export const PRODUCTS: Product[] = SPECS.map(build);

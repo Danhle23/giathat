@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { vnd } from "@/lib/format";
+import { ProductImage } from "./ProductImage";
 
 type Demo = {
   emoji: string;
+  img: string;
   name: string;
   listed: number;
   current: number;
@@ -16,6 +18,7 @@ type Demo = {
 const DEMOS: Demo[] = [
   {
     emoji: "🎧",
+    img: "https://loremflickr.com/200/200/headphones,earbuds?lock=11",
     name: "Tai nghe Bluetooth XYZ Pro",
     listed: 599000,
     current: 299000,
@@ -25,6 +28,7 @@ const DEMOS: Demo[] = [
   },
   {
     emoji: "🧴",
+    img: "https://loremflickr.com/200/200/sunscreen,skincare?lock=22",
     name: "Kem chống nắng Anessa Gold",
     listed: 572000,
     current: 406000,
@@ -34,6 +38,7 @@ const DEMOS: Demo[] = [
   },
   {
     emoji: "🤖",
+    img: "https://loremflickr.com/200/200/robot,vacuum?lock=33",
     name: "Robot hút bụi Xiaomi E10",
     listed: 6190000,
     current: 3890000,
@@ -43,6 +48,7 @@ const DEMOS: Demo[] = [
   },
   {
     emoji: "👟",
+    img: "https://loremflickr.com/200/200/sneakers,shoes?lock=44",
     name: "Giày sneaker thể thao TR-01",
     listed: 743000,
     current: 450000,
@@ -96,8 +102,14 @@ export function DetectorDemo() {
 
         {/* product */}
         <div className="flex items-center gap-3">
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 text-3xl">
-            {d.emoji}
+          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl">
+            <ProductImage
+              key={d.img}
+              src={d.img}
+              alt={d.name}
+              emoji={d.emoji}
+              gradient="from-slate-100 to-slate-50"
+            />
           </div>
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-slate-800">{d.name}</p>

@@ -9,6 +9,7 @@ import { CATEGORY_VISUAL } from "@/lib/category";
 import { PriceChart } from "@/components/PriceChart";
 import { VerdictBadge } from "@/components/VerdictBadge";
 import { AlertForm } from "@/components/AlertForm";
+import { ProductImage } from "@/components/ProductImage";
 
 export function generateStaticParams() {
   return getAllProducts().map((p) => ({ id: p.id }));
@@ -66,8 +67,13 @@ export default async function ProductPage({
         <div className="space-y-5">
           {/* Header */}
           <div className="flex gap-4">
-            <div className={`grid h-24 w-24 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${c.from} ${c.to} text-4xl`}>
-              {c.emoji}
+            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-200">
+              <ProductImage
+                src={product.image}
+                alt={product.name}
+                emoji={c.emoji}
+                gradient={`${c.from} ${c.to}`}
+              />
             </div>
             <div>
               <h1 className="text-xl font-bold text-slate-900">{product.name}</h1>

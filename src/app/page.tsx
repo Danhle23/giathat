@@ -3,9 +3,12 @@ import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { Odometer } from "@/components/Odometer";
 import { DetectorDemo } from "@/components/DetectorDemo";
 import { DealTicker } from "@/components/DealTicker";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { getAllProducts, getRealDeals, getFakeDeals } from "@/lib/repository";
+import { computeStats } from "@/lib/pricing";
 
 const CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
 
@@ -14,11 +17,16 @@ export default function HomePage() {
   const realDeals = getRealDeals().map((r) => r.product);
   const fakeDeals = getFakeDeals();
   const pricePoints = all.reduce((sum, p) => sum + p.history.length, 0);
+  const totalSavings = all.reduce((sum, p) => {
+    const s = computeStats(p);
+    return sum + Math.max(0, s.typical - s.current);
+  }, 0);
 
   return (
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200/70">
+        <CursorSpotlight />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="dot-grid absolute inset-0 opacity-50" />
           <div className="animate-float-slow absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#ee4d2d]/15 blur-3xl" />
@@ -110,9 +118,26 @@ export default function HomePage() {
           </Section>
         </Reveal>
 
+        {/* Savings odometer band */}
+        <Reveal>
+          <section className="relative mt-14 overflow-hidden rounded-3xl bg-gradient-to-br from-[#ee4d2d] to-amber-500 p-8 text-center text-white shadow-xl shadow-[#ee4d2d]/20">
+            <div className="dot-grid absolute inset-0 opacity-20" />
+            <p className="relative text-sm font-medium text-white/90">
+              Tổng mức giảm giá <b>THẬT</b> mà Giá Thật phát hiện hôm nay
+            </p>
+            <div className="relative mt-2 flex items-baseline justify-center text-4xl font-extrabold sm:text-5xl">
+              <Odometer value={totalSavings} />
+              <span className="ml-1">₫</span>
+            </div>
+            <p className="relative mt-2 text-sm text-white/80">
+              Mua đúng giá, đừng để “giảm giá ảo” móc túi.
+            </p>
+          </section>
+        </Reveal>
+
         {/* How it works */}
         <Reveal>
-          <section className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+          <section className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <h2 className="text-center text-xl font-bold text-slate-900">Cách hoạt động</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
               {[

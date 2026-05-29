@@ -29,6 +29,8 @@ export interface Product {
   shop: string;
   /** Original Shopee product URL */
   url: string;
+  /** Product image URL (keyword stock now, real Shopee CDN later) */
+  image: string;
   /** Price the seller currently shows with a strike-through (giá niêm yết) */
   listedPrice: number;
   /** Price the customer actually pays right now */
