@@ -63,6 +63,12 @@ export default function RootLayout({
                 Deal hôm nay
               </Link>
               <Link
+                href="/bai-viet"
+                className="hidden rounded-lg px-3 py-2 transition hover:bg-slate-100 hover:text-slate-900 sm:block"
+              >
+                Bài viết
+              </Link>
+              <Link
                 href="/theo-doi"
                 className="rounded-full bg-[#ee4d2d] px-4 py-2 font-semibold text-white shadow-sm shadow-[#ee4d2d]/20 transition hover:bg-[#d63e1f]"
               >

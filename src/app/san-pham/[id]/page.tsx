@@ -10,6 +10,9 @@ import { PriceChart } from "@/components/PriceChart";
 import { VerdictBadge } from "@/components/VerdictBadge";
 import { AlertForm } from "@/components/AlertForm";
 import { ProductImage } from "@/components/ProductImage";
+import { ShareButtons } from "@/components/ShareButtons";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export function generateStaticParams() {
   return getAllProducts().map((p) => ({ id: p.id }));
@@ -54,9 +57,36 @@ export default async function ProductPage({
   const real = genuineDiscountPct(stats);
   const c = CATEGORY_VISUAL[product.category];
   const buyUrl = shopee.affiliateLink(product, "product-page");
+  const productUrl = `${SITE_URL}/san-pham/${product.id}`;
+  const savings = Math.max(0, stats.typical - stats.current);
+
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: product.name,
+    image: [product.image],
+    description: `${product.name} — lịch sử giá Shopee, ${verdict.label.toLowerCase()}. ${verdict.reason}`,
+    brand: { "@type": "Brand", name: product.shop },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: product.rating,
+      reviewCount: product.sold,
+    },
+    offers: {
+      "@type": "Offer",
+      url: productUrl,
+      priceCurrency: "VND",
+      price: product.currentPrice,
+      availability: "https://schema.org/InStock",
+    },
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <nav className="mb-4 text-sm text-slate-400">
         <Link href="/" className="hover:text-[#ee4d2d]">Trang chủ</Link>
         <span className="mx-1">/</span>
@@ -110,41 +140,56 @@ export default async function ProductPage({
 
         {/* Sidebar: buy + alert */}
         <aside className="space-y-4">
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-[#ee4d2d]">{vnd(product.currentPrice)}</span>
-            </div>
-            {product.listedPrice > product.currentPrice && (
-              <p className="mt-1 text-sm text-slate-400">
-                <span className="line-through">{vnd(product.listedPrice)}</span>{" "}
-                <span className="text-rose-500">
-                  (shop ghi -{pct(stats.claimedDiscount)})
-                </span>
-              </p>
+          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            {/* conversion ribbon (honest, data-driven) */}
+            {stats.isLowest && (
+              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-1.5 text-center text-xs font-bold text-white">
+                🔥 GIÁ THẤP NHẤT {stats.days} NGÀY
+              </div>
             )}
-            <p className="mt-2 text-sm">
-              {real > 0 ? (
-                <span className="font-semibold text-emerald-600">
-                  Rẻ hơn thật {real}% so với giá thường ngày
-                </span>
-              ) : (
-                <span className="font-semibold text-rose-600">
-                  Không rẻ hơn giá thường ngày — cẩn thận giảm ảo
-                </span>
+            <div className="p-4">
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-extrabold text-[#ee4d2d]">{vnd(product.currentPrice)}</span>
+              </div>
+              {product.listedPrice > product.currentPrice && (
+                <p className="mt-1 text-sm text-slate-400">
+                  <span className="line-through">{vnd(product.listedPrice)}</span>{" "}
+                  <span className="text-rose-500">(shop ghi -{pct(stats.claimedDiscount)})</span>
+                </p>
               )}
-            </p>
+              <p className="mt-2 text-sm">
+                {real > 0 ? (
+                  <span className="font-semibold text-emerald-600">
+                    Rẻ hơn thật {real}% so với giá thường ngày
+                  </span>
+                ) : (
+                  <span className="font-semibold text-rose-600">
+                    Không rẻ hơn giá thường ngày — cẩn thận giảm ảo
+                  </span>
+                )}
+              </p>
+              {savings > 0 && (
+                <p className="mt-1 text-sm font-semibold text-slate-700">
+                  💰 Tiết kiệm {vnd(savings)} so với giá thường ngày
+                </p>
+              )}
 
-            <a
-              href={buyUrl}
-              target="_blank"
-              rel="nofollow sponsored noopener"
-              className="mt-4 block rounded-lg bg-[#ee4d2d] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#d63e1f]"
-            >
-              Mua trên Shopee →
-            </a>
-            <p className="mt-2 text-center text-[11px] text-slate-400">
-              Liên kết tiếp thị · bạn không trả thêm phí
-            </p>
+              <a
+                href={buyUrl}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                className="mt-4 block rounded-lg bg-[#ee4d2d] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#d63e1f]"
+              >
+                Mua trên Shopee →
+              </a>
+              <p className="mt-2 text-center text-[11px] text-slate-400">
+                Liên kết tiếp thị · bạn không trả thêm phí · Dữ liệu giá cập nhật mỗi ngày
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <ShareButtons url={productUrl} title={`${product.name} — ${vnd(product.currentPrice)} (${verdict.label})`} />
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-4">
