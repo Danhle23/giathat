@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { Logo } from "@/components/Logo";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -35,31 +36,38 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col text-slate-800">
-        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/75 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-            <Link href="/" className="flex items-center gap-2 font-extrabold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#ee4d2d] text-white">G</span>
-              <span className="text-lg">
-                Giá<span className="text-[#ee4d2d]">Thật</span>
-              </span>
+            <Link href="/" aria-label="Giá Thật — trang chủ">
+              <Logo />
             </Link>
-            <nav className="flex items-center gap-1 text-sm font-medium text-slate-600">
-              <Link href="/" className="rounded-lg px-3 py-1.5 hover:bg-slate-100">Deal hôm nay</Link>
-              <Link href="/theo-doi" className="rounded-lg px-3 py-1.5 hover:bg-slate-100">Theo dõi giá</Link>
+            <nav className="flex items-center gap-1.5 text-sm font-medium text-slate-600">
+              <Link
+                href="/"
+                className="rounded-lg px-3 py-2 transition hover:bg-slate-100 hover:text-slate-900"
+              >
+                Deal hôm nay
+              </Link>
+              <Link
+                href="/theo-doi"
+                className="rounded-full bg-[#ee4d2d] px-4 py-2 font-semibold text-white shadow-sm shadow-[#ee4d2d]/20 transition hover:bg-[#d63e1f]"
+              >
+                Theo dõi giá
+              </Link>
             </nav>
           </div>
         </header>
 
         <main className="flex-1">{children}</main>
 
-        <footer className="border-t border-slate-200 bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
-            <p className="font-semibold text-slate-700">Giá Thật</p>
-            <p className="mt-1 max-w-xl">
+        <footer className="border-t border-slate-200/70 bg-white/70">
+          <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-500">
+            <Logo />
+            <p className="mt-3 max-w-xl">
               Công cụ theo dõi lịch sử giá &amp; phát hiện giảm giá ảo trên Shopee.
               Một số liên kết là liên kết tiếp thị (affiliate) — bạn không phải trả thêm phí.
             </p>
-            <p className="mt-3 text-xs text-slate-400">
+            <p className="mt-4 text-xs text-slate-400">
               © {new Date().getFullYear()} Giá Thật · Dữ liệu mẫu phục vụ demo MVP.
             </p>
           </div>
