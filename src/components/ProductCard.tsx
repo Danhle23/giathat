@@ -14,7 +14,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/san-pham/${product.id}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-[#ee4d2d]/40 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#ee4d2d]/40 hover:shadow-xl hover:shadow-[#ee4d2d]/5"
     >
       <div className={`relative flex h-36 items-center justify-center bg-gradient-to-br ${c.from} ${c.to} text-5xl`}>
         <span aria-hidden>{c.emoji}</span>
