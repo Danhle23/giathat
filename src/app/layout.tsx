@@ -5,7 +5,10 @@ import { Logo } from "@/components/Logo";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { DealToasts } from "@/components/DealToasts";
 import { getFakeDeals, getRealDeals } from "@/lib/repository";
+import { ARTICLES } from "@/lib/articles";
 import "./globals.css";
+
+const FOOTER_CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
 
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
@@ -81,15 +84,61 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
 
         <footer className="border-t border-slate-200/70 bg-white/70">
-          <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-500">
-            <Logo />
-            <p className="mt-3 max-w-xl">
-              Công cụ theo dõi lịch sử giá &amp; phát hiện giảm giá ảo trên Shopee.
-              Một số liên kết là liên kết tiếp thị (affiliate) — bạn không phải trả thêm phí.
-            </p>
-            <p className="mt-4 text-xs text-slate-400">
-              © {new Date().getFullYear()} Giá Thật · Dữ liệu mẫu phục vụ demo MVP.
-            </p>
+          <div className="mx-auto max-w-6xl px-4 py-12">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Brand */}
+              <div className="lg:col-span-1">
+                <Logo />
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                  Theo dõi lịch sử giá &amp; phát hiện giảm giá ảo trên Shopee.
+                  Mua đúng giá, không bị lừa.
+                </p>
+              </div>
+
+              {/* Explore */}
+              <div>
+                <p className="text-sm font-semibold text-slate-800">Khám phá</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-500">
+                  <li><Link href="/" className="hover:text-[#ee4d2d]">Deal hôm nay</Link></li>
+                  <li><Link href="/tim-kiem" className="hover:text-[#ee4d2d]">Tìm kiếm sản phẩm</Link></li>
+                  <li><Link href="/theo-doi" className="hover:text-[#ee4d2d]">Theo dõi giá</Link></li>
+                  <li><Link href="/bai-viet" className="hover:text-[#ee4d2d]">Bài viết</Link></li>
+                </ul>
+              </div>
+
+              {/* Categories */}
+              <div>
+                <p className="text-sm font-semibold text-slate-800">Danh mục</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-500">
+                  {FOOTER_CATEGORIES.map((cat) => (
+                    <li key={cat}>
+                      <Link href={`/tim-kiem?q=${encodeURIComponent(cat)}`} className="hover:text-[#ee4d2d]">
+                        {cat}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Articles */}
+              <div>
+                <p className="text-sm font-semibold text-slate-800">Bài viết mới</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-500">
+                  {ARTICLES.slice(0, 3).map((a) => (
+                    <li key={a.slug}>
+                      <Link href={`/bai-viet/${a.slug}`} className="hover:text-[#ee4d2d]">
+                        {a.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-col gap-2 border-t border-slate-200/70 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+              <p>© {new Date().getFullYear()} Giá Thật · Dữ liệu mẫu phục vụ demo MVP.</p>
+              <p>Một số liên kết là liên kết tiếp thị (affiliate) — bạn không trả thêm phí.</p>
+            </div>
           </div>
         </footer>
 
