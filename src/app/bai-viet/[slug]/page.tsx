@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ARTICLES, getArticle } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
 import { viDate } from "@/lib/format";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -79,8 +80,24 @@ export default async function ArticlePage({
         })}
       </div>
 
+      {/* Internal links to category pages */}
+      <div className="mt-10 border-t border-black/10 pt-6">
+        <p className="text-[13px] font-semibold text-[#1d1d1f]">Soi giá theo danh mục</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {CATEGORIES.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/danh-muc/${c.slug}`}
+              className="rounded-full border border-black/10 bg-white px-3 py-1 text-[13px] text-[#6e6e73] transition hover:border-[#0066cc]/40 hover:text-[#0066cc]"
+            >
+              {c.emoji} {c.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* CTA */}
-      <div className="mt-12 rounded-3xl bg-[#0066cc] p-8 text-center text-white">
+      <div className="mt-10 rounded-3xl bg-[#0066cc] p-8 text-center text-white">
         <p className="text-[22px] font-semibold">Tra giá thật trước khi mua</p>
         <p className="mt-1.5 text-[15px] text-white/90">
           Xem lịch sử giá &amp; bắt giảm ảo cho bất kỳ sản phẩm Shopee nào.
