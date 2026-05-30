@@ -42,6 +42,15 @@ export function computeStats(product: Product): PriceStats {
  * - NORMAL:    roughly the usual price.
  */
 export function getVerdict(stats: PriceStats): Verdict {
+  // Not enough price history yet to judge honestly — don't cry "fake" or "deal".
+  if (stats.days < 3) {
+    return {
+      kind: "NORMAL",
+      label: "Đang theo dõi",
+      reason: "Cần thêm vài ngày dữ liệu giá để xác định deal thật hay giảm ảo.",
+    };
+  }
+
   const { realDiscount, claimedDiscount, isLowest, current, min } = stats;
   const nearLow = current <= min * 1.03; // within 3% of the lowest ever
 
