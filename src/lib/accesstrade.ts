@@ -32,7 +32,7 @@ export function isAccessTradeConfigured(): boolean {
 }
 
 export async function fetchDatafeed(
-  opts: { limit?: number; page?: number } = {},
+  opts: { limit?: number; page?: number; onlyDiscounted?: boolean } = {},
 ): Promise<{ items: DatafeedItem[]; total: number }> {
   const key = process.env.ACCESSTRADE_API_KEY;
   const campaign = process.env.ACCESSTRADE_CAMPAIGN;
@@ -45,6 +45,9 @@ export async function fetchDatafeed(
     limit: String(opts.limit ?? 20),
     page: String(opts.page ?? 1),
   });
+  if (opts.onlyDiscounted) {
+    params.set("status_discount", "1"); // only products with an active discount
+  }
 
   const res = await fetch(`${API_BASE}/datafeeds?${params.toString()}`, {
     headers: { Authorization: `Token ${key}` },
