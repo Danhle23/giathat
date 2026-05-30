@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllProducts, getProduct } from "@/lib/repository";
+import { getProduct } from "@/lib/catalog";
 import { computeStats, getVerdict, genuineDiscountPct, pct } from "@/lib/pricing";
 import { shopee } from "@/lib/shopee/provider";
 import { vnd, compact } from "@/lib/format";
-import { CATEGORY_VISUAL } from "@/lib/category";
+import { getCategoryVisual } from "@/lib/category";
 import { PriceChart } from "@/components/PriceChart";
 import { VerdictBadge } from "@/components/VerdictBadge";
 import { AlertForm } from "@/components/AlertForm";
 import { ProductImage } from "@/components/ProductImage";
 import { ShareButtons } from "@/components/ShareButtons";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+export const dynamic = "force-dynamic";
 
-export function generateStaticParams() {
-  return getAllProducts().map((p) => ({ id: p.id }));
-}
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export async function generateMetadata({
   params,
@@ -24,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const product = getProduct(id);
+  const product = await getProduct(id);
   if (!product) return { title: "Không tìm thấy sản phẩm" };
 
   const stats = computeStats(product);
@@ -49,14 +47,14 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = getProduct(id);
+  const product = await getProduct(id);
   if (!product) notFound();
 
   const stats = computeStats(product);
   const verdict = getVerdict(stats);
   const real = genuineDiscountPct(stats);
-  const c = CATEGORY_VISUAL[product.category];
-  const buyUrl = shopee.affiliateLink(product, "product-page");
+  const c = getCategoryVisual(product.category);
+  const buyUrl = product.affLink ?? shopee.affiliateLink(product, "product-page");
   const productUrl = `${SITE_URL}/san-pham/${product.id}`;
   const savings = Math.max(0, stats.typical - stats.current);
 

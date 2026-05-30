@@ -8,15 +8,20 @@ import { DetectorDemo } from "@/components/DetectorDemo";
 import { DealTicker } from "@/components/DealTicker";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { Tilt } from "@/components/Tilt";
-import { getAllProducts, getRealDeals, getFakeDeals } from "@/lib/repository";
+import { getAllProducts, getRealDeals, getFakeDeals } from "@/lib/catalog";
 import { computeStats } from "@/lib/pricing";
+
+export const dynamic = "force-dynamic";
 
 const CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
 
-export default function HomePage() {
-  const all = getAllProducts();
-  const realDeals = getRealDeals().map((r) => r.product);
-  const fakeDeals = getFakeDeals();
+export default async function HomePage() {
+  const [all, ranked, fakeDeals] = await Promise.all([
+    getAllProducts(),
+    getRealDeals(),
+    getFakeDeals(),
+  ]);
+  const realDeals = ranked.map((r) => r.product);
   const pricePoints = all.reduce((sum, p) => sum + p.history.length, 0);
   const totalSavings = all.reduce((sum, p) => {
     const s = computeStats(p);
@@ -85,44 +90,62 @@ export default function HomePage() {
       <div className="mx-auto max-w-4xl px-4">
         <Reveal>
           <div className="-mt-9 grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/30 backdrop-blur sm:gap-3">
-            <StatItem value={pricePoints} label="Điểm giá đã ghi nhận" />
-            <StatItem value={realDeals.length} label="Deal thật hôm nay" accent="text-emerald-400" />
+            <StatItem value={all.length} label="Sản phẩm theo dõi" />
+            <StatItem value={pricePoints} label="Điểm giá đã ghi" accent="text-violet-300" />
             <StatItem value={fakeDeals.length} label="Giảm ảo đã bắt" accent="text-rose-400" />
           </div>
         </Reveal>
       </div>
 
       <div className="mx-auto max-w-6xl px-4 pb-16">
-        <Reveal>
-          <Section
-            accent="bg-rose-500"
-            title="⚠️ Cẩn thận: giảm giá ảo"
-            subtitle="Quảng cáo giảm sâu nhưng thực ra không hề rẻ hơn ngày thường."
-          >
-            <Grid>
-              {fakeDeals.map((p) => (
-                <Tilt key={p.id}>
-                  <ProductCard product={p} />
-                </Tilt>
-              ))}
-            </Grid>
-          </Section>
-        </Reveal>
+        {fakeDeals.length > 0 && (
+          <Reveal>
+            <Section
+              accent="bg-rose-500"
+              title="⚠️ Cẩn thận: giảm giá ảo"
+              subtitle="Quảng cáo giảm sâu nhưng thực ra không hề rẻ hơn ngày thường."
+            >
+              <Grid>
+                {fakeDeals.map((p) => (
+                  <Tilt key={p.id}>
+                    <ProductCard product={p} />
+                  </Tilt>
+                ))}
+              </Grid>
+            </Section>
+          </Reveal>
+        )}
 
         <Reveal>
-          <Section
-            accent="bg-emerald-500"
-            title="✅ Deal thật hôm nay"
-            subtitle="Đang ở mức thấp nhất hoặc rẻ hơn rõ rệt so với giá thường ngày."
-          >
-            <Grid>
-              {realDeals.map((p) => (
-                <Tilt key={p.id}>
-                  <ProductCard product={p} />
-                </Tilt>
-              ))}
-            </Grid>
-          </Section>
+          {realDeals.length > 0 ? (
+            <Section
+              accent="bg-emerald-500"
+              title="✅ Deal thật hôm nay"
+              subtitle="Đang ở mức thấp nhất hoặc rẻ hơn rõ rệt so với giá thường ngày."
+            >
+              <Grid>
+                {realDeals.map((p) => (
+                  <Tilt key={p.id}>
+                    <ProductCard product={p} />
+                  </Tilt>
+                ))}
+              </Grid>
+            </Section>
+          ) : (
+            <Section
+              accent="bg-violet-500"
+              title="🔥 Sản phẩm đang giảm giá"
+              subtitle="Đang thu thập lịch sử giá — vài ngày nữa hệ thống sẽ tự bóc deal thật / giảm ảo."
+            >
+              <Grid>
+                {all.slice(0, 16).map((p) => (
+                  <Tilt key={p.id}>
+                    <ProductCard product={p} />
+                  </Tilt>
+                ))}
+              </Grid>
+            </Section>
+          )}
         </Reveal>
 
         {/* Savings odometer band */}

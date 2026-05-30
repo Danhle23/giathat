@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { getProduct } from "@/lib/repository";
+import { getProduct } from "@/lib/catalog";
 import { computeStats, getVerdict, genuineDiscountPct } from "@/lib/pricing";
 import { vnd } from "@/lib/format";
 
@@ -30,7 +30,7 @@ async function loadFonts() {
 
 export default async function Image({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = getProduct(id);
+  const product = await getProduct(id);
   const fonts = await loadFonts();
 
   if (!product) {

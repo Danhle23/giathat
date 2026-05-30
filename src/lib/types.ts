@@ -24,13 +24,16 @@ export interface Product {
   /** Shopee shop id */
   shopId: number;
   name: string;
-  category: Category;
+  /** Free-form category (mock uses the Category enum values; real data is a slug). */
+  category: string;
   /** Shop / brand display name */
   shop: string;
   /** Original Shopee product URL */
   url: string;
   /** Product image URL (keyword stock now, real Shopee CDN later) */
   image: string;
+  /** Ready affiliate link (from datafeed). When set, used as the buy link. */
+  affLink?: string;
   /** Price the seller currently shows with a strike-through (giá niêm yết) */
   listedPrice: number;
   /** Price the customer actually pays right now */

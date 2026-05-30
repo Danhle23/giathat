@@ -4,7 +4,7 @@ import { Be_Vietnam_Pro, Playfair_Display } from "next/font/google";
 import { Logo } from "@/components/Logo";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { DealToasts } from "@/components/DealToasts";
-import { getFakeDeals, getRealDeals } from "@/lib/repository";
+import { getFakeDeals, getRealDeals } from "@/lib/catalog";
 import { ARTICLES } from "@/lib/articles";
 import "./globals.css";
 
@@ -43,12 +43,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const [fakeDeals, realDeals] = await Promise.all([getFakeDeals(), getRealDeals()]);
   const toastItems = [
-    ...getFakeDeals().map((p) => ({ id: p.id, name: p.name, type: "FAKE" as const, drop: 0 })),
-    ...getRealDeals().map((r) => ({
+    ...fakeDeals.map((p) => ({ id: p.id, name: p.name, type: "FAKE" as const, drop: 0 })),
+    ...realDeals.map((r) => ({
       id: r.product.id,
       name: r.product.name,
       type: "REAL" as const,

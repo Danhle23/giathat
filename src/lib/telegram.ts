@@ -1,4 +1,4 @@
-import { getRealDeals } from "./repository";
+import { getRealDeals } from "./catalog";
 import { shopee } from "./shopee/provider";
 import { vnd } from "./format";
 
@@ -20,12 +20,12 @@ export async function postDealsToTelegram(limit = 3) {
     return { ok: false, reason: "missing_config", posted: 0 };
   }
 
-  const deals = getRealDeals().slice(0, limit);
+  const deals = (await getRealDeals()).slice(0, limit);
   const results: unknown[] = [];
 
   for (const { product, realDiscount } of deals) {
     const drop = Math.round(realDiscount * 100);
-    const buyUrl = shopee.affiliateLink(product, "telegram");
+    const buyUrl = product.affLink ?? shopee.affiliateLink(product, "telegram");
     const productUrl = `${site}/san-pham/${product.id}`;
     const photo = `${site}/san-pham/${product.id}/opengraph-image`;
 

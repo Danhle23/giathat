@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { getAllProducts } from "@/lib/repository";
+import { getAllProducts } from "@/lib/catalog";
 import { computeStats, getVerdict, genuineDiscountPct } from "@/lib/pricing";
 import { vnd } from "@/lib/format";
 
 /** Stock-ticker style scrolling band of live deals. */
-export function DealTicker() {
-  const items = getAllProducts().map((p) => {
+export async function DealTicker() {
+  const products = await getAllProducts();
+  const items = products.slice(0, 20).map((p) => {
     const stats = computeStats(p);
     return {
       id: p.id,

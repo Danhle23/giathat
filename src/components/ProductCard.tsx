@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { computeStats, getVerdict, genuineDiscountPct } from "@/lib/pricing";
 import { vnd, compact } from "@/lib/format";
-import { CATEGORY_VISUAL } from "@/lib/category";
+import { getCategoryVisual } from "@/lib/category";
 import { VerdictBadge } from "./VerdictBadge";
 import { ProductImage } from "./ProductImage";
 
@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
   const stats = computeStats(product);
   const verdict = getVerdict(stats);
   const real = genuineDiscountPct(stats);
-  const c = CATEGORY_VISUAL[product.category];
+  const c = getCategoryVisual(product.category);
 
   return (
     <Link
@@ -47,10 +47,12 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="flex items-center justify-between text-xs text-slate-500">
-          <span>⭐ {product.rating.toFixed(1)}</span>
-          <span>Đã bán {compact(product.sold)}</span>
-        </div>
+        {(product.rating > 0 || product.sold > 0) && (
+          <div className="flex items-center justify-between text-xs text-slate-500">
+            <span>⭐ {product.rating.toFixed(1)}</span>
+            <span>Đã bán {compact(product.sold)}</span>
+          </div>
+        )}
       </div>
     </Link>
   );

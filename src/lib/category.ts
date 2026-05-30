@@ -11,3 +11,10 @@ export const CATEGORY_VISUAL: Record<
   "Mẹ & Bé": { emoji: "🍼", from: "from-teal-100", to: "to-emerald-100" },
   "Sức khỏe": { emoji: "🩺", from: "from-lime-100", to: "to-green-100" },
 };
+
+const DEFAULT_VISUAL = { emoji: "🛍️", from: "from-violet-200", to: "to-indigo-200" };
+
+/** Safe lookup that tolerates unknown/real categories. */
+export function getCategoryVisual(category: string) {
+  return CATEGORY_VISUAL[category as Category] ?? DEFAULT_VISUAL;
+}

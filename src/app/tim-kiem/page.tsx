@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
 import { Tilt } from "@/components/Tilt";
-import { searchProducts } from "@/lib/repository";
+import { searchProducts } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Tìm kiếm sản phẩm",
@@ -15,7 +15,7 @@ export default async function SearchPage({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q = "" } = await searchParams;
-  const results = searchProducts(q);
+  const results = await searchProducts(q);
 
   return (
     <div>
