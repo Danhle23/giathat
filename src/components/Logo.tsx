@@ -30,7 +30,7 @@ export function Logo({
       </svg>
       {withText && (
         <span className="text-[19px] font-semibold tracking-tight text-[#1d1d1f]">
-          Giá<span className="text-[#0066cc]">Thật</span>
+          Soi<span className="text-[#0066cc]">Giá</span>
         </span>
       )}
     </span>

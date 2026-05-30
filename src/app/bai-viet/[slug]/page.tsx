@@ -41,8 +41,8 @@ export default async function ArticlePage({
     headline: article.title,
     description: article.description,
     datePublished: article.date,
-    author: { "@type": "Organization", name: "Giá Thật" },
-    publisher: { "@type": "Organization", name: "Giá Thật" },
+    author: { "@type": "Organization", name: "Soi Giá" },
+    publisher: { "@type": "Organization", name: "Soi Giá" },
     mainEntityOfPage: `${SITE_URL}/bai-viet/${article.slug}`,
   };
 

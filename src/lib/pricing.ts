@@ -1,7 +1,7 @@
 import type { PriceSnapshot, PriceStats, Product, Verdict } from "./types";
 
 /**
- * The heart of Giá Thật: turn a price history into honest statistics and a
+ * The heart of Soi Giá: turn a price history into honest statistics and a
  * verdict that tells the shopper whether a "sale" is real or fake.
  */
 export function computeStats(product: Product): PriceStats {

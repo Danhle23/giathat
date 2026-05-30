@@ -3,7 +3,7 @@ import { getAllProducts, getProduct, searchProducts } from "../repository";
 import { AFFILIATE_LINKS } from "../affiliate-links";
 
 /**
- * Adapter boundary between Giá Thật and Shopee.
+ * Adapter boundary between Soi Giá and Shopee.
  *
  * The MVP ships with `MockShopeeProvider` (served from the seed catalog).
  * When the Shopee Affiliate Open Platform credentials are approved, add a

@@ -30,7 +30,7 @@ export const ARTICLES: Article[] = [
       { h: "2. So với GIÁ THƯỜNG NGÀY, không phải giá gạch" },
       { p: "Deal thật là khi giá hiện tại thấp hơn rõ rệt so với mức giá trung bình mà sản phẩm vẫn bán suốt thời gian qua. Muốn biết điều đó, bạn cần lịch sử giá." },
       { h: "3. Dùng lịch sử giá để kiểm chứng" },
-      { p: "Công cụ như Giá Thật lưu lại giá theo từng ngày. Chỉ cần nhìn biểu đồ là biết: giá hôm nay có đang ở vùng thấp nhất, hay chỉ là mức giá quen thuộc được khoác áo “giảm sốc”." },
+      { p: "Công cụ như Soi Giá lưu lại giá theo từng ngày. Chỉ cần nhìn biểu đồ là biết: giá hôm nay có đang ở vùng thấp nhất, hay chỉ là mức giá quen thuộc được khoác áo “giảm sốc”." },
       { list: [
         "🟢 Giá hiện tại ≈ mức thấp nhất → deal thật, nên mua",
         "🟡 Thấp hơn trung bình một chút → giá tốt",
@@ -79,7 +79,7 @@ export const ARTICLES: Article[] = [
       { p: "Giá đang bình thường, dù quảng cáo có hấp dẫn → bạn có thể đặt cảnh báo và chờ một đợt giảm thật, đặc biệt gần các ngày sale lớn." },
       { h: "Nếu là “giảm ảo”" },
       { p: "Tuyệt đối đừng vội. Giá này không hề rẻ — chờ là lựa chọn đúng." },
-      { p: "Cách nhanh nhất để áp dụng: tra sản phẩm trên Giá Thật, nhìn biểu đồ, rồi quyết." },
+      { p: "Cách nhanh nhất để áp dụng: tra sản phẩm trên Soi Giá, nhìn biểu đồ, rồi quyết." },
     ],
   },
 ];

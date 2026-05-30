@@ -21,7 +21,7 @@ export default function TrackPage() {
             Theo dõi giá sản phẩm bạn muốn mua
           </h1>
           <p className="mx-auto mt-3 max-w-lg text-[17px] text-[#6e6e73]">
-            Dán link Shopee bất kỳ. Giá Thật ghi lại giá mỗi ngày, dựng biểu đồ và
+            Dán link Shopee bất kỳ. Soi Giá ghi lại giá mỗi ngày, dựng biểu đồ và
             <b className="text-[#1d1d1f]"> báo bạn khi có giảm giá thật</b>.
           </p>
 

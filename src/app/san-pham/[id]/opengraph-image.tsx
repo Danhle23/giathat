@@ -7,7 +7,7 @@ import { vnd } from "@/lib/format";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Giá Thật - thẻ deal";
+export const alt = "Soi Giá - thẻ deal";
 
 const COLORS: Record<string, { bg: string; fg: string; label: string }> = {
   REAL_DEAL: { bg: "#ecfdf5", fg: "#059669", label: "DEAL THẬT" },
@@ -37,7 +37,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
     return new ImageResponse(
       (
         <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff", fontSize: 48, fontFamily: "Be Vietnam Pro" }}>
-          Giá Thật
+          Soi Giá
         </div>
       ),
       { ...size, fonts },
@@ -65,11 +65,11 @@ export default async function Image({ params }: { params: Promise<{ id: string }
         {/* Brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ display: "flex", width: 56, height: 56, background: "#0066cc", color: "#fff", borderRadius: 14, alignItems: "center", justifyContent: "center", fontSize: 34, fontWeight: 700 }}>
-            G
+            S
           </div>
           <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: "#0f172a" }}>
-            <span>Giá</span>
-            <span style={{ color: "#0066cc" }}>Thật</span>
+            <span>Soi</span>
+            <span style={{ color: "#0066cc" }}>&nbsp;Giá</span>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-// Core domain types for Giá Thật (giathat)
+// Core domain types for Soi Giá (giathat)
 
 export type Category =
   | "Điện tử"

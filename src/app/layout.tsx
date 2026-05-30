@@ -18,8 +18,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Giá Thật — Lịch sử giá Shopee & cảnh báo giảm giá ảo",
-    template: "%s | Giá Thật",
+    default: "Soi Giá — Lịch sử giá Shopee & cảnh báo giảm giá ảo",
+    template: "%s | Soi Giá",
   },
   description:
     "Theo dõi lịch sử giá mỹ phẩm Shopee, phát hiện giảm giá ảo và nhận cảnh báo khi có deal thật. Mua đúng giá, không bị lừa.",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    siteName: "Giá Thật",
-    title: "Giá Thật — Bắt giảm giá ảo trên Shopee",
+    siteName: "Soi Giá",
+    title: "Soi Giá — Bắt giảm giá ảo trên Shopee",
     description: "Lịch sử giá thật giúp bạn biết deal nào xịn, deal nào ảo.",
   },
 };
@@ -41,7 +41,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-white text-[#1d1d1f]">
         <header className="sticky top-0 z-20 border-b border-black/5 bg-white/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-            <Link href="/" aria-label="Giá Thật — trang chủ">
+            <Link href="/" aria-label="Soi Giá — trang chủ">
               <Logo />
             </Link>
             <nav className="flex items-center gap-5 text-[13px] text-[#1d1d1f]">
@@ -99,7 +99,7 @@ export default function RootLayout({
             </div>
 
             <div className="mt-12 flex flex-col gap-2 border-t border-black/10 pt-6 text-[12px] text-[#86868b] sm:flex-row sm:items-center sm:justify-between">
-              <p>© {new Date().getFullYear()} Giá Thật.</p>
+              <p>© {new Date().getFullYear()} Soi Giá.</p>
               <p>Một số liên kết là liên kết tiếp thị (affiliate) — bạn không trả thêm phí.</p>
             </div>
           </div>
