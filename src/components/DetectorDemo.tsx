@@ -87,7 +87,7 @@ export function DetectorDemo() {
       {/* glow */}
       <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-[#ee4d2d]/15 to-amber-300/15 blur-2xl" />
 
-      <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-2xl shadow-[#ee4d2d]/10 backdrop-blur">
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
         {/* scanning beam — restarts every cycle via key */}
         <div
           key={i}
@@ -108,14 +108,14 @@ export function DetectorDemo() {
               src={d.img}
               alt={d.name}
               emoji={d.emoji}
-              gradient="from-slate-100 to-slate-50"
+              gradient="from-white/10 to-white/5"
             />
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-slate-800">{d.name}</p>
+            <p className="truncate text-sm font-semibold text-white">{d.name}</p>
             <div className="mt-0.5 flex items-center gap-2">
-              <span className="text-lg font-extrabold text-[#ee4d2d]">{vnd(d.current)}</span>
-              <span className="text-xs text-slate-400 line-through">{vnd(d.listed)}</span>
+              <span className="text-lg font-extrabold text-[#ff8a3d]">{vnd(d.current)}</span>
+              <span className="text-xs text-slate-500 line-through">{vnd(d.listed)}</span>
               <span className="rounded bg-rose-500 px-1 py-0.5 text-[10px] font-bold text-white">
                 shop ghi -{advertised}%
               </span>
@@ -142,16 +142,16 @@ export function DetectorDemo() {
         <div
           key={`v${i}`}
           className={`verdict-pop mt-3 rounded-xl border p-3 ${
-            isFake ? "border-rose-200 bg-rose-50" : "border-emerald-200 bg-emerald-50"
+            isFake ? "border-rose-500/30 bg-rose-500/10" : "border-emerald-500/30 bg-emerald-500/10"
           }`}
         >
           <div className="flex items-center gap-2">
             <span className="text-lg">{isFake ? "⚠️" : "✅"}</span>
-            <span className={`text-sm font-bold ${isFake ? "text-rose-700" : "text-emerald-700"}`}>
+            <span className={`text-sm font-bold ${isFake ? "text-rose-300" : "text-emerald-300"}`}>
               {isFake ? "Giảm giá ảo" : "Deal thật"}
             </span>
           </div>
-          <p className="mt-1 text-xs leading-relaxed text-slate-600">{d.truth}</p>
+          <p className="mt-1 text-xs leading-relaxed text-slate-300">{d.truth}</p>
         </div>
 
         {/* dots */}
@@ -160,7 +160,7 @@ export function DetectorDemo() {
             <span
               key={idx}
               className={`h-1.5 rounded-full transition-all ${
-                idx === i ? "w-5 bg-[#ee4d2d]" : "w-1.5 bg-slate-200"
+                idx === i ? "w-5 bg-[#ff8a3d]" : "w-1.5 bg-white/20"
               }`}
             />
           ))}

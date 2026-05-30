@@ -84,10 +84,10 @@ export default function HomePage() {
       {/* Animated stats band */}
       <div className="mx-auto max-w-4xl px-4">
         <Reveal>
-          <div className="-mt-9 grid grid-cols-3 gap-2 rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-xl shadow-slate-200/50 backdrop-blur sm:gap-3">
+          <div className="-mt-9 grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/30 backdrop-blur sm:gap-3">
             <StatItem value={pricePoints} label="Điểm giá đã ghi nhận" />
-            <StatItem value={realDeals.length} label="Deal thật hôm nay" accent="text-emerald-600" />
-            <StatItem value={fakeDeals.length} label="Giảm ảo đã bắt" accent="text-rose-600" />
+            <StatItem value={realDeals.length} label="Deal thật hôm nay" accent="text-emerald-400" />
+            <StatItem value={fakeDeals.length} label="Giảm ảo đã bắt" accent="text-rose-400" />
           </div>
         </Reveal>
       </div>
@@ -144,8 +144,8 @@ export default function HomePage() {
 
         {/* How it works */}
         <Reveal>
-          <section className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <h2 className="font-display text-center text-2xl font-bold text-slate-900">Cách hoạt động</h2>
+          <section className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+            <h2 className="font-display text-center text-2xl font-bold text-white">Cách hoạt động</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
               {[
                 { icon: "🔗", title: "Dán link Shopee", desc: "Thêm sản phẩm bạn quan tâm để theo dõi." },
@@ -153,11 +153,11 @@ export default function HomePage() {
                 { icon: "🔔", title: "Nhận cảnh báo", desc: "Báo email ngay khi giá xuống thật sự." },
               ].map((s) => (
                 <div key={s.title} className="text-center">
-                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[#ee4d2d]/10 to-amber-100 text-2xl">
+                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[#ee4d2d]/25 to-amber-500/10 text-2xl">
                     {s.icon}
                   </div>
-                  <h3 className="mt-3 font-semibold text-slate-800">{s.title}</h3>
-                  <p className="mt-1 text-sm text-slate-500">{s.desc}</p>
+                  <h3 className="mt-3 font-semibold text-white">{s.title}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -179,7 +179,7 @@ export default function HomePage() {
 function StatItem({
   value,
   label,
-  accent = "text-slate-900",
+  accent = "text-white",
 }: {
   value: number;
   label: string;
@@ -190,7 +190,7 @@ function StatItem({
       <div className={`text-2xl font-extrabold sm:text-3xl ${accent}`}>
         <CountUp to={value} />
       </div>
-      <div className="mt-0.5 text-[11px] text-slate-500 sm:text-xs">{label}</div>
+      <div className="mt-0.5 text-[11px] text-slate-400 sm:text-xs">{label}</div>
     </div>
   );
 }
@@ -211,8 +211,8 @@ function Section({
       <div className="mb-5 flex items-start gap-3">
         <span className={`mt-1 h-7 w-1.5 rounded-full ${accent}`} />
         <div>
-          <h2 className="font-display text-2xl font-bold text-slate-900">{title}</h2>
-          <p className="text-sm text-slate-500">{subtitle}</p>
+          <h2 className="font-display text-2xl font-bold text-white">{title}</h2>
+          <p className="text-sm text-slate-400">{subtitle}</p>
         </div>
       </div>
       {children}

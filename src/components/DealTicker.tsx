@@ -18,7 +18,7 @@ export function DealTicker() {
   const row = [...items, ...items]; // duplicated for a seamless loop
 
   return (
-    <div className="marquee-pause overflow-hidden border-y border-slate-200/70 bg-white/60 backdrop-blur">
+    <div className="marquee-pause overflow-hidden border-y border-white/10 bg-white/[0.03] backdrop-blur">
       <div className="flex w-max animate-marquee items-center gap-7 py-2.5">
         {row.map((it, idx) => (
           <Link
@@ -26,16 +26,16 @@ export function DealTicker() {
             href={`/san-pham/${it.id}`}
             className="flex items-center gap-2 whitespace-nowrap text-sm transition hover:opacity-100"
           >
-            <span className="font-medium text-slate-700">{it.name}</span>
-            <span className="font-semibold text-[#ee4d2d]">{vnd(it.price)}</span>
+            <span className="font-medium text-slate-300">{it.name}</span>
+            <span className="font-semibold text-[#ff8a3d]">{vnd(it.price)}</span>
             {it.fake ? (
-              <span className="font-semibold text-rose-500">⚠ giảm ảo</span>
+              <span className="font-semibold text-rose-400">⚠ giảm ảo</span>
             ) : it.drop > 0 ? (
-              <span className="font-semibold text-emerald-600">▼ {it.drop}%</span>
+              <span className="font-semibold text-emerald-400">▼ {it.drop}%</span>
             ) : (
-              <span className="text-slate-400">— ổn định</span>
+              <span className="text-slate-500">— ổn định</span>
             )}
-            <span className="text-slate-300">•</span>
+            <span className="text-slate-600">•</span>
           </Link>
         ))}
       </div>

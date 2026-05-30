@@ -59,23 +59,23 @@ export default async function ArticlePage({
         <span className="text-slate-500">{article.emoji}</span>
       </nav>
 
-      <h1 className="font-display text-4xl font-bold leading-tight text-slate-900">{article.title}</h1>
+      <h1 className="font-display text-4xl font-bold leading-tight text-white">{article.title}</h1>
       <p className="mt-2 text-sm text-slate-400">
         {viDate(article.date)} · {article.readMins} phút đọc
       </p>
 
       <div className="mt-6 space-y-4">
         {article.blocks.map((b, i) => {
-          if (b.h) return <h2 key={i} className="pt-2 text-lg font-bold text-slate-900">{b.h}</h2>;
+          if (b.h) return <h2 key={i} className="font-display pt-2 text-xl font-bold text-white">{b.h}</h2>;
           if (b.list)
             return (
-              <ul key={i} className="list-disc space-y-1.5 pl-5 text-slate-700">
+              <ul key={i} className="list-disc space-y-1.5 pl-5 text-slate-300">
                 {b.list.map((item, j) => (
                   <li key={j}>{item}</li>
                 ))}
               </ul>
             );
-          return <p key={i} className="leading-relaxed text-slate-700">{b.p}</p>;
+          return <p key={i} className="leading-relaxed text-slate-300">{b.p}</p>;
         })}
       </div>
 

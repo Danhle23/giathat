@@ -37,10 +37,10 @@ export async function generateMetadata({
 }
 
 const VERDICT_BANNER: Record<string, string> = {
-  REAL_DEAL: "border-emerald-200 bg-emerald-50",
-  GOOD: "border-sky-200 bg-sky-50",
-  NORMAL: "border-slate-200 bg-slate-50",
-  FAKE: "border-rose-200 bg-rose-50",
+  REAL_DEAL: "border-emerald-500/30 bg-emerald-500/10",
+  GOOD: "border-sky-500/30 bg-sky-500/10",
+  NORMAL: "border-white/10 bg-white/[0.04]",
+  FAKE: "border-rose-500/30 bg-rose-500/10",
 };
 
 export default async function ProductPage({
@@ -97,7 +97,7 @@ export default async function ProductPage({
         <div className="space-y-5">
           {/* Header */}
           <div className="flex gap-4">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-200">
+            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-white/10">
               <ProductImage
                 src={product.image}
                 alt={product.name}
@@ -106,8 +106,8 @@ export default async function ProductPage({
               />
             </div>
             <div>
-              <h1 className="font-display text-2xl font-bold text-slate-900">{product.name}</h1>
-              <p className="mt-1 text-sm text-slate-500">{product.shop}</p>
+              <h1 className="font-display text-2xl font-bold text-white">{product.name}</h1>
+              <p className="mt-1 text-sm text-slate-400">{product.shop}</p>
               <p className="mt-1 text-xs text-slate-400">
                 ⭐ {product.rating.toFixed(1)} · Đã bán {compact(product.sold)}
               </p>
@@ -119,12 +119,12 @@ export default async function ProductPage({
             <div className="flex items-center gap-2">
               <VerdictBadge kind={verdict.kind} label={verdict.label} size="lg" />
             </div>
-            <p className="mt-2 text-sm text-slate-700">{verdict.reason}</p>
+            <p className="mt-2 text-sm text-slate-300">{verdict.reason}</p>
           </div>
 
           {/* Price chart */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
-            <h2 className="mb-2 text-sm font-semibold text-slate-700">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+            <h2 className="mb-2 text-sm font-semibold text-slate-300">
               Lịch sử giá {stats.days} ngày
             </h2>
             <PriceChart history={product.history} current={product.currentPrice} />
@@ -132,15 +132,15 @@ export default async function ProductPage({
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3">
-            <Stat label="Thấp nhất" value={vnd(stats.min)} accent="text-emerald-600" />
+            <Stat label="Thấp nhất" value={vnd(stats.min)} accent="text-emerald-400" />
             <Stat label="Trung bình" value={vnd(stats.typical)} />
-            <Stat label="Cao nhất" value={vnd(stats.max)} accent="text-rose-500" />
+            <Stat label="Cao nhất" value={vnd(stats.max)} accent="text-rose-400" />
           </div>
         </div>
 
         {/* Sidebar: buy + alert */}
         <aside className="space-y-4">
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+          <div className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.04]">
             {/* conversion ribbon (honest, data-driven) */}
             {stats.isLowest && (
               <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-1.5 text-center text-xs font-bold text-white">
@@ -149,27 +149,27 @@ export default async function ProductPage({
             )}
             <div className="p-4">
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-[#ee4d2d]">{vnd(product.currentPrice)}</span>
+                <span className="text-3xl font-extrabold text-[#ff8a3d]">{vnd(product.currentPrice)}</span>
               </div>
               {product.listedPrice > product.currentPrice && (
-                <p className="mt-1 text-sm text-slate-400">
+                <p className="mt-1 text-sm text-slate-500">
                   <span className="line-through">{vnd(product.listedPrice)}</span>{" "}
-                  <span className="text-rose-500">(shop ghi -{pct(stats.claimedDiscount)})</span>
+                  <span className="text-rose-400">(shop ghi -{pct(stats.claimedDiscount)})</span>
                 </p>
               )}
               <p className="mt-2 text-sm">
                 {real > 0 ? (
-                  <span className="font-semibold text-emerald-600">
+                  <span className="font-semibold text-emerald-400">
                     Rẻ hơn thật {real}% so với giá thường ngày
                   </span>
                 ) : (
-                  <span className="font-semibold text-rose-600">
+                  <span className="font-semibold text-rose-400">
                     Không rẻ hơn giá thường ngày — cẩn thận giảm ảo
                   </span>
                 )}
               </p>
               {savings > 0 && (
-                <p className="mt-1 text-sm font-semibold text-slate-700">
+                <p className="mt-1 text-sm font-semibold text-slate-200">
                   💰 Tiết kiệm {vnd(savings)} so với giá thường ngày
                 </p>
               )}
@@ -188,11 +188,11 @@ export default async function ProductPage({
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
             <ShareButtons url={productUrl} title={`${product.name} — ${vnd(product.currentPrice)} (${verdict.label})`} />
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
             <AlertForm productId={product.id} />
           </div>
         </aside>
@@ -201,9 +201,9 @@ export default async function ProductPage({
   );
 }
 
-function Stat({ label, value, accent = "text-slate-800" }: { label: string; value: string; accent?: string }) {
+function Stat({ label, value, accent = "text-white" }: { label: string; value: string; accent?: string }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-3 text-center">
+    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-center">
       <p className="text-xs text-slate-400">{label}</p>
       <p className={`mt-1 text-sm font-bold ${accent}`}>{value}</p>
     </div>

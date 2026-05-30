@@ -42,20 +42,20 @@ export function DealToasts({ items }: { items: ToastItem[] }) {
         <Link
           key={seq}
           href={`/san-pham/${current.id}`}
-          className="toast-in pointer-events-auto flex max-w-xs items-center gap-3 rounded-2xl border border-slate-200 bg-white/95 p-3 pr-4 shadow-xl shadow-slate-300/30 backdrop-blur"
+          className="toast-in pointer-events-auto flex max-w-xs items-center gap-3 rounded-2xl border border-white/10 bg-[#141a2e]/95 p-3 pr-4 shadow-xl shadow-black/50 backdrop-blur"
         >
           <span
             className={`grid h-9 w-9 shrink-0 place-items-center rounded-full text-lg ${
-              current.type === "FAKE" ? "bg-rose-50" : "bg-emerald-50"
+              current.type === "FAKE" ? "bg-rose-500/15" : "bg-emerald-500/15"
             }`}
           >
             {current.type === "FAKE" ? "⚠️" : "✅"}
           </span>
           <div className="min-w-0 text-sm">
-            <p className={`font-semibold ${current.type === "FAKE" ? "text-rose-600" : "text-emerald-600"}`}>
+            <p className={`font-semibold ${current.type === "FAKE" ? "text-rose-400" : "text-emerald-400"}`}>
               {current.type === "FAKE" ? "Vừa bắt được giảm ảo" : "Deal thật vừa xuất hiện"}
             </p>
-            <p className="truncate text-slate-500">
+            <p className="truncate text-slate-400">
               {current.name}
               {current.type === "REAL" && current.drop > 0 ? ` · -${current.drop}%` : ""}
             </p>

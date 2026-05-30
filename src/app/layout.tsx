@@ -58,29 +58,29 @@ export default function RootLayout({
 
   return (
     <html lang="vi" className={`${beVietnam.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col text-slate-800">
+      <body className="flex min-h-full flex-col text-slate-200">
         <ScrollProgress />
-        <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/75 backdrop-blur-md">
+        <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0e1a]/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
             <Link href="/" aria-label="Giá Thật — trang chủ">
               <Logo />
             </Link>
-            <nav className="flex items-center gap-1.5 text-sm font-medium text-slate-600">
+            <nav className="flex items-center gap-1.5 text-sm font-medium text-slate-300">
               <Link
                 href="/"
-                className="rounded-lg px-3 py-2 transition hover:bg-slate-100 hover:text-slate-900"
+                className="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-white"
               >
                 Deal hôm nay
               </Link>
               <Link
                 href="/bai-viet"
-                className="hidden rounded-lg px-3 py-2 transition hover:bg-slate-100 hover:text-slate-900 sm:block"
+                className="hidden rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-white sm:block"
               >
                 Bài viết
               </Link>
               <Link
                 href="/theo-doi"
-                className="rounded-full bg-[#ee4d2d] px-4 py-2 font-semibold text-white shadow-sm shadow-[#ee4d2d]/20 transition hover:bg-[#d63e1f]"
+                className="rounded-full bg-[#ee4d2d] px-4 py-2 font-semibold text-white shadow-sm shadow-[#ee4d2d]/30 transition hover:bg-[#d63e1f]"
               >
                 Theo dõi giá
               </Link>
@@ -90,13 +90,13 @@ export default function RootLayout({
 
         <main className="flex-1">{children}</main>
 
-        <footer className="border-t border-slate-200/70 bg-white/70">
+        <footer className="border-t border-white/10 bg-white/[0.02]">
           <div className="mx-auto max-w-6xl px-4 py-12">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {/* Brand */}
               <div className="lg:col-span-1">
                 <Logo />
-                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                <p className="mt-3 text-sm leading-relaxed text-slate-400">
                   Theo dõi lịch sử giá &amp; phát hiện giảm giá ảo trên Shopee.
                   Mua đúng giá, không bị lừa.
                 </p>
@@ -104,22 +104,22 @@ export default function RootLayout({
 
               {/* Explore */}
               <div>
-                <p className="text-sm font-semibold text-slate-800">Khám phá</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-500">
-                  <li><Link href="/" className="hover:text-[#ee4d2d]">Deal hôm nay</Link></li>
-                  <li><Link href="/tim-kiem" className="hover:text-[#ee4d2d]">Tìm kiếm sản phẩm</Link></li>
-                  <li><Link href="/theo-doi" className="hover:text-[#ee4d2d]">Theo dõi giá</Link></li>
-                  <li><Link href="/bai-viet" className="hover:text-[#ee4d2d]">Bài viết</Link></li>
+                <p className="text-sm font-semibold text-white">Khám phá</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-400">
+                  <li><Link href="/" className="hover:text-[#ff8a3d]">Deal hôm nay</Link></li>
+                  <li><Link href="/tim-kiem" className="hover:text-[#ff8a3d]">Tìm kiếm sản phẩm</Link></li>
+                  <li><Link href="/theo-doi" className="hover:text-[#ff8a3d]">Theo dõi giá</Link></li>
+                  <li><Link href="/bai-viet" className="hover:text-[#ff8a3d]">Bài viết</Link></li>
                 </ul>
               </div>
 
               {/* Categories */}
               <div>
-                <p className="text-sm font-semibold text-slate-800">Danh mục</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-500">
+                <p className="text-sm font-semibold text-white">Danh mục</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-400">
                   {FOOTER_CATEGORIES.map((cat) => (
                     <li key={cat}>
-                      <Link href={`/tim-kiem?q=${encodeURIComponent(cat)}`} className="hover:text-[#ee4d2d]">
+                      <Link href={`/tim-kiem?q=${encodeURIComponent(cat)}`} className="hover:text-[#ff8a3d]">
                         {cat}
                       </Link>
                     </li>
@@ -129,11 +129,11 @@ export default function RootLayout({
 
               {/* Articles */}
               <div>
-                <p className="text-sm font-semibold text-slate-800">Bài viết mới</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-500">
+                <p className="text-sm font-semibold text-white">Bài viết mới</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-400">
                   {ARTICLES.slice(0, 3).map((a) => (
                     <li key={a.slug}>
-                      <Link href={`/bai-viet/${a.slug}`} className="hover:text-[#ee4d2d]">
+                      <Link href={`/bai-viet/${a.slug}`} className="hover:text-[#ff8a3d]">
                         {a.title}
                       </Link>
                     </li>
@@ -142,7 +142,7 @@ export default function RootLayout({
               </div>
             </div>
 
-            <div className="mt-10 flex flex-col gap-2 border-t border-slate-200/70 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
               <p>© {new Date().getFullYear()} Giá Thật · Dữ liệu mẫu phục vụ demo MVP.</p>
               <p>Một số liên kết là liên kết tiếp thị (affiliate) — bạn không trả thêm phí.</p>
             </div>

@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export default function ArticlesPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="font-display text-3xl font-bold text-slate-900">Bài viết</h1>
-      <p className="mt-1 text-slate-500">
+      <h1 className="font-display text-3xl font-bold text-white">Bài viết</h1>
+      <p className="mt-1 text-slate-400">
         Mẹo mua đúng giá, nhận biết giảm ảo & săn deal thật trên Shopee.
       </p>
 
@@ -23,15 +23,15 @@ export default function ArticlesPage() {
           <Link
             key={a.slug}
             href={`/bai-viet/${a.slug}`}
-            className="group flex gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#ee4d2d]/40 hover:shadow-lg"
+            className="group flex gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-[#ee4d2d]/40 hover:bg-white/[0.06]"
           >
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#ee4d2d]/10 to-amber-100 text-2xl">
+            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#ee4d2d]/25 to-amber-500/10 text-2xl">
               {a.emoji}
             </div>
             <div>
-              <h2 className="font-semibold text-slate-800 group-hover:text-[#ee4d2d]">{a.title}</h2>
-              <p className="mt-1 line-clamp-2 text-sm text-slate-500">{a.description}</p>
-              <p className="mt-1 text-xs text-slate-400">
+              <h2 className="font-semibold text-white group-hover:text-[#ff8a3d]">{a.title}</h2>
+              <p className="mt-1 line-clamp-2 text-sm text-slate-400">{a.description}</p>
+              <p className="mt-1 text-xs text-slate-500">
                 {viDate(a.date)} · {a.readMins} phút đọc
               </p>
             </div>

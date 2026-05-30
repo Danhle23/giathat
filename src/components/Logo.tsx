@@ -1,6 +1,6 @@
 /**
- * Brand logo: a price line dipping down into a verified "check" data point,
- * inside a gradient badge — "giá giảm thật, đã kiểm chứng".
+ * Brand logo: a downward price trend with an arrowhead ("giá giảm thật"),
+ * inside a circular gradient badge. White wordmark for dark surfaces.
  */
 export function Logo({
   size = 34,
@@ -16,24 +16,32 @@ export function Logo({
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="gt-badge" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#ee4d2d" />
-            <stop offset="1" stopColor="#ff9a3c" />
+            <stop stopColor="#ff8a3d" />
+            <stop offset="1" stopColor="#ee4d2d" />
           </linearGradient>
         </defs>
-        <rect x="2" y="2" width="36" height="36" rx="11" fill="url(#gt-badge)" />
+        <circle cx="20" cy="20" r="18" fill="url(#gt-badge)" />
+        {/* downward price trend */}
         <path
-          d="M10 18.5 L15 22.5 L19 25.5 L29.5 12"
+          d="M10 14 L17 20 L22 16.5 L29 24"
           stroke="#fff"
-          strokeWidth="3.4"
+          strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="29.5" cy="12" r="2.7" fill="#fff" />
+        {/* arrowhead pointing down-right */}
+        <path
+          d="M29 24 L23.5 24 M29 24 L29 18.5"
+          stroke="#fff"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
       {withText && (
-        <span className="text-lg font-extrabold tracking-tight text-slate-900">
+        <span className="text-lg font-extrabold tracking-tight text-white">
           Giá
-          <span className="bg-gradient-to-r from-[#ee4d2d] to-amber-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#ff8a3d] to-amber-300 bg-clip-text text-transparent">
             Thật
           </span>
         </span>

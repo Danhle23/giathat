@@ -58,13 +58,13 @@ export function PriceChart({
 
         {/* typical (average) reference line */}
         <line x1={padL} y1={typicalY} x2={width - padR} y2={typicalY} stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 4" />
-        <text x={padL + 2} y={typicalY - 5} fontSize="11" fontWeight={600} fill="#475569" stroke="#fff" strokeWidth={3} paintOrder="stroke">
+        <text x={padL + 2} y={typicalY - 5} fontSize="11" fontWeight={600} fill="#cbd5e1" stroke="#0b1020" strokeWidth={3} paintOrder="stroke">
           Giá thường ngày {vnd(typical)}
         </text>
 
         {/* all-time low reference line */}
         <line x1={padL} y1={minY} x2={width - padR} y2={minY} stroke="#10b981" strokeWidth="1" strokeDasharray="2 3" />
-        <text x={padL + 2} y={minY + 14} fontSize="11" fontWeight={600} fill="#059669" stroke="#fff" strokeWidth={3} paintOrder="stroke">
+        <text x={padL + 2} y={minY + 14} fontSize="11" fontWeight={600} fill="#34d399" stroke="#0b1020" strokeWidth={3} paintOrder="stroke">
           Thấp nhất {vnd(min)}
         </text>
 

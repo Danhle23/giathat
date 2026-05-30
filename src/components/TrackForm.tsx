@@ -36,7 +36,7 @@ export function TrackForm() {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Dán link sản phẩm Shopee vào đây…"
-        className="rounded-lg border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#ee4d2d]"
+        className="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#ee4d2d]"
         required
       />
       <button
@@ -47,10 +47,10 @@ export function TrackForm() {
         {status === "loading" ? "Đang xử lý…" : "Bắt đầu theo dõi giá"}
       </button>
       {status === "done" && (
-        <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">{message}</p>
+        <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-300">{message}</p>
       )}
       {status === "error" && (
-        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{message}</p>
+        <p className="rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-300">{message}</p>
       )}
     </form>
   );
