@@ -60,7 +60,7 @@ export default function RootLayout({
     <html lang="vi" className={`${beVietnam.variable} ${playfair.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col text-slate-200">
         <ScrollProgress />
-        <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0e1a]/80 backdrop-blur-md">
+        <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0913]/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
             <Link href="/" aria-label="Giá Thật — trang chủ">
               <Logo />
@@ -80,7 +80,7 @@ export default function RootLayout({
               </Link>
               <Link
                 href="/theo-doi"
-                className="rounded-full bg-[#ee4d2d] px-4 py-2 font-semibold text-white shadow-sm shadow-[#ee4d2d]/30 transition hover:bg-[#d63e1f]"
+                className="rounded-full bg-[#8b5cf6] px-4 py-2 font-semibold text-white shadow-sm shadow-[#8b5cf6]/30 transition hover:bg-[#7c3aed]"
               >
                 Theo dõi giá
               </Link>
@@ -106,10 +106,10 @@ export default function RootLayout({
               <div>
                 <p className="text-sm font-semibold text-white">Khám phá</p>
                 <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                  <li><Link href="/" className="hover:text-[#ff8a3d]">Deal hôm nay</Link></li>
-                  <li><Link href="/tim-kiem" className="hover:text-[#ff8a3d]">Tìm kiếm sản phẩm</Link></li>
-                  <li><Link href="/theo-doi" className="hover:text-[#ff8a3d]">Theo dõi giá</Link></li>
-                  <li><Link href="/bai-viet" className="hover:text-[#ff8a3d]">Bài viết</Link></li>
+                  <li><Link href="/" className="hover:text-[#a78bfa]">Deal hôm nay</Link></li>
+                  <li><Link href="/tim-kiem" className="hover:text-[#a78bfa]">Tìm kiếm sản phẩm</Link></li>
+                  <li><Link href="/theo-doi" className="hover:text-[#a78bfa]">Theo dõi giá</Link></li>
+                  <li><Link href="/bai-viet" className="hover:text-[#a78bfa]">Bài viết</Link></li>
                 </ul>
               </div>
 
@@ -119,7 +119,7 @@ export default function RootLayout({
                 <ul className="mt-3 space-y-2 text-sm text-slate-400">
                   {FOOTER_CATEGORIES.map((cat) => (
                     <li key={cat}>
-                      <Link href={`/tim-kiem?q=${encodeURIComponent(cat)}`} className="hover:text-[#ff8a3d]">
+                      <Link href={`/tim-kiem?q=${encodeURIComponent(cat)}`} className="hover:text-[#a78bfa]">
                         {cat}
                       </Link>
                     </li>
@@ -133,7 +133,7 @@ export default function RootLayout({
                 <ul className="mt-3 space-y-2 text-sm text-slate-400">
                   {ARTICLES.slice(0, 3).map((a) => (
                     <li key={a.slug}>
-                      <Link href={`/bai-viet/${a.slug}`} className="hover:text-[#ff8a3d]">
+                      <Link href={`/bai-viet/${a.slug}`} className="hover:text-[#a78bfa]">
                         {a.title}
                       </Link>
                     </li>

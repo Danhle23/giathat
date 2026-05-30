@@ -13,7 +13,7 @@ export function SearchBar({ initial = "" }: { initial?: string }) {
         e.preventDefault();
         router.push(`/tim-kiem?q=${encodeURIComponent(q.trim())}`);
       }}
-      className="flex w-full items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1.5 shadow-sm focus-within:border-[#ee4d2d]"
+      className="flex w-full items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1.5 shadow-sm focus-within:border-[#8b5cf6]"
     >
       <span className="pl-2 text-slate-400" aria-hidden>🔍</span>
       <input
@@ -25,7 +25,7 @@ export function SearchBar({ initial = "" }: { initial?: string }) {
       />
       <button
         type="submit"
-        className="shrink-0 rounded-full bg-[#ee4d2d] px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-[#d63e1f]"
+        className="shrink-0 rounded-full bg-[#8b5cf6] px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-[#7c3aed]"
       >
         Kiểm tra giá
       </button>

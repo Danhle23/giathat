@@ -88,7 +88,7 @@ export default async function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <nav className="mb-4 text-sm text-slate-400">
-        <Link href="/" className="hover:text-[#ee4d2d]">Trang chủ</Link>
+        <Link href="/" className="hover:text-[#8b5cf6]">Trang chủ</Link>
         <span className="mx-1">/</span>
         <span className="text-slate-500">{product.category}</span>
       </nav>
@@ -149,7 +149,7 @@ export default async function ProductPage({
             )}
             <div className="p-4">
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-[#ff8a3d]">{vnd(product.currentPrice)}</span>
+                <span className="text-3xl font-extrabold text-[#a78bfa]">{vnd(product.currentPrice)}</span>
               </div>
               {product.listedPrice > product.currentPrice && (
                 <p className="mt-1 text-sm text-slate-500">
@@ -178,7 +178,7 @@ export default async function ProductPage({
                 href={buyUrl}
                 target="_blank"
                 rel="nofollow sponsored noopener"
-                className="mt-4 block rounded-lg bg-[#ee4d2d] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#d63e1f]"
+                className="mt-4 block rounded-lg bg-[#8b5cf6] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#7c3aed]"
               >
                 Mua trên Shopee →
               </a>

@@ -42,7 +42,7 @@ export function DealToasts({ items }: { items: ToastItem[] }) {
         <Link
           key={seq}
           href={`/san-pham/${current.id}`}
-          className="toast-in pointer-events-auto flex max-w-xs items-center gap-3 rounded-2xl border border-white/10 bg-[#141a2e]/95 p-3 pr-4 shadow-xl shadow-black/50 backdrop-blur"
+          className="toast-in pointer-events-auto flex max-w-xs items-center gap-3 rounded-2xl border border-white/10 bg-[#171327]/95 p-3 pr-4 shadow-xl shadow-black/50 backdrop-blur"
         >
           <span
             className={`grid h-9 w-9 shrink-0 place-items-center rounded-full text-lg ${

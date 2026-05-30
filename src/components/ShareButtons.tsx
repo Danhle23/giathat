@@ -42,7 +42,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
       <div className="flex flex-wrap gap-2">
         <button
           onClick={nativeShare}
-          className="rounded-lg bg-[#ee4d2d] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#d63e1f]"
+          className="rounded-lg bg-[#8b5cf6] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#7c3aed]"
         >
           ↗ Chia sẻ
         </button>

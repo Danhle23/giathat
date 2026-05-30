@@ -23,7 +23,7 @@ export default async function SearchPage({
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="dot-grid-light absolute inset-0 opacity-60" />
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#ee4d2d]/20 blur-3xl" />
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#8b5cf6]/20 blur-3xl" />
         </div>
         <div className="mx-auto max-w-2xl px-4 py-12 text-center">
           <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">

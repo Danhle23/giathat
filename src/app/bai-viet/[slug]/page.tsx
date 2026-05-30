@@ -54,7 +54,7 @@ export default async function ArticlePage({
       />
 
       <nav className="mb-4 text-sm text-slate-400">
-        <Link href="/bai-viet" className="hover:text-[#ee4d2d]">Bài viết</Link>
+        <Link href="/bai-viet" className="hover:text-[#8b5cf6]">Bài viết</Link>
         <span className="mx-1">/</span>
         <span className="text-slate-500">{article.emoji}</span>
       </nav>
@@ -80,14 +80,14 @@ export default async function ArticlePage({
       </div>
 
       {/* CTA */}
-      <div className="mt-10 rounded-2xl bg-gradient-to-br from-[#ee4d2d] to-amber-500 p-6 text-center text-white">
+      <div className="mt-10 rounded-2xl bg-gradient-to-br from-[#8b5cf6] to-indigo-500 p-6 text-center text-white">
         <p className="text-lg font-bold">Tra giá thật trước khi mua</p>
         <p className="mt-1 text-sm text-white/90">
           Xem lịch sử giá & bắt giảm ảo cho bất kỳ sản phẩm Shopee nào.
         </p>
         <Link
           href="/"
-          className="mt-4 inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#ee4d2d] transition hover:scale-[1.02]"
+          className="mt-4 inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[#8b5cf6] transition hover:scale-[1.02]"
         >
           Kiểm tra giá ngay →
         </Link>

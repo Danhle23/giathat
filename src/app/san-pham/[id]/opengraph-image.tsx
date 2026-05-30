@@ -64,12 +64,12 @@ export default async function Image({ params }: { params: Promise<{ id: string }
       >
         {/* Brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div style={{ display: "flex", width: 56, height: 56, background: "#ee4d2d", color: "#fff", borderRadius: 14, alignItems: "center", justifyContent: "center", fontSize: 34, fontWeight: 700 }}>
+          <div style={{ display: "flex", width: 56, height: 56, background: "#8b5cf6", color: "#fff", borderRadius: 14, alignItems: "center", justifyContent: "center", fontSize: 34, fontWeight: 700 }}>
             G
           </div>
           <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: "#0f172a" }}>
             <span>Giá</span>
-            <span style={{ color: "#ee4d2d" }}>Thật</span>
+            <span style={{ color: "#8b5cf6" }}>Thật</span>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
 
         {/* Price row */}
         <div style={{ display: "flex", alignItems: "flex-end", gap: 24, marginTop: "auto" }}>
-          <div style={{ display: "flex", fontSize: 84, fontWeight: 700, color: "#ee4d2d" }}>
+          <div style={{ display: "flex", fontSize: 84, fontWeight: 700, color: "#8b5cf6" }}>
             {vnd(product.currentPrice)}
           </div>
           {product.listedPrice > product.currentPrice && (

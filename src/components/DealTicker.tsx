@@ -27,7 +27,7 @@ export function DealTicker() {
             className="flex items-center gap-2 whitespace-nowrap text-sm transition hover:opacity-100"
           >
             <span className="font-medium text-slate-300">{it.name}</span>
-            <span className="font-semibold text-[#ff8a3d]">{vnd(it.price)}</span>
+            <span className="font-semibold text-[#a78bfa]">{vnd(it.price)}</span>
             {it.fake ? (
               <span className="font-semibold text-rose-400">⚠ giảm ảo</span>
             ) : it.drop > 0 ? (

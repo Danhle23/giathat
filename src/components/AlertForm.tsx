@@ -45,14 +45,14 @@ export function AlertForm({ productId }: { productId: string }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email của bạn"
-        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#ee4d2d]"
+        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8b5cf6]"
       />
       <input
         inputMode="numeric"
         value={target}
         onChange={(e) => setTarget(e.target.value)}
         placeholder="Giá mong muốn (VND) — để trống nếu cần báo mọi đợt giảm"
-        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#ee4d2d]"
+        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8b5cf6]"
       />
       <button
         type="submit"
