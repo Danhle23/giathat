@@ -8,7 +8,7 @@ import { getFakeDeals, getRealDeals } from "@/lib/catalog";
 import { ARTICLES } from "@/lib/articles";
 import "./globals.css";
 
-const FOOTER_CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
+const FOOTER_CATEGORIES = ["Kem chống nắng", "Serum", "Son", "Sữa rửa mặt", "Mặt nạ", "Nước hoa"];
 
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",

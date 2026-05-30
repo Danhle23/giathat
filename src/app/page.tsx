@@ -13,7 +13,7 @@ import { computeStats } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic";
 
-const CATEGORIES = ["Điện tử", "Gia dụng", "Thời trang", "Làm đẹp", "Mẹ & Bé", "Sức khỏe"];
+const CATEGORIES = ["Kem chống nắng", "Serum", "Son", "Sữa rửa mặt", "Mặt nạ", "Nước hoa"];
 
 export default async function HomePage() {
   const [all, ranked, fakeDeals] = await Promise.all([
