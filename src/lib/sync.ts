@@ -82,6 +82,7 @@ export async function syncDatafeed(): Promise<{ synced: number; total: number; s
   const rows = curate(collected);
   if (rows.length === 0) return { synced: 0, total, scanned: collected.length };
 
+  const ids = rows.map((r) => r.id);
   const today = new Date().toISOString().slice(0, 10);
 
   await sql`
@@ -99,8 +100,9 @@ export async function syncDatafeed(): Promise<{ synced: number; total: number; s
     ON CONFLICT (product_id, captured_on) DO NOTHING
   `;
 
-  await sql`DELETE FROM products WHERE updated_at < now() - interval '1 hour'`;
-  await sql`DELETE FROM price_snapshots WHERE product_id NOT IN (SELECT id FROM products)`;
+  // keep catalog = exactly the current curated batch (remove everything else)
+  await sql`DELETE FROM products WHERE id NOT IN ${sql(ids)}`;
+  await sql`DELETE FROM price_snapshots WHERE product_id NOT IN ${sql(ids)}`;
 
   return { synced: rows.length, total, scanned: collected.length };
 }
