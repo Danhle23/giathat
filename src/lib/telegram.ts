@@ -16,6 +16,12 @@ export async function postDealsToTelegram(limit = 3) {
   const chatId = process.env.TELEGRAM_CHAT_ID;
   const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
 
+  // Safety switch: keep the bot quiet until you flip TELEGRAM_BOT_ENABLED=true
+  // (turn it on only AFTER the Shopee campaign is approved so links work).
+  if (process.env.TELEGRAM_BOT_ENABLED !== "true") {
+    return { ok: false, reason: "bot_disabled", posted: 0 };
+  }
+
   if (!token || !chatId) {
     return { ok: false, reason: "missing_config", posted: 0 };
   }
