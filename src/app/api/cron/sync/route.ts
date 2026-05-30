@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const result = await syncDatafeed(100);
+    const result = await syncDatafeed();
     return NextResponse.json({ ok: true, ...result });
   } catch (e) {
     return NextResponse.json({ ok: false, error: String(e) }, { status: 500 });

@@ -27,11 +27,15 @@ export function ProductCard({ product }: { product: Product }) {
         <span className="absolute left-2 top-2 z-10">
           <VerdictBadge kind={verdict.kind} label={verdict.label} />
         </span>
-        {real > 0 && (
+        {real > 0 ? (
           <span className="absolute right-2 top-2 z-10 rounded-md bg-[#8b5cf6] px-1.5 py-0.5 text-xs font-bold text-white shadow-sm">
             -{real}% thật
           </span>
-        )}
+        ) : product.listedPrice > product.currentPrice ? (
+          <span className="absolute right-2 top-2 z-10 rounded-md border border-white/20 bg-black/50 px-1.5 py-0.5 text-xs font-bold text-white backdrop-blur">
+            -{Math.round(stats.claimedDiscount * 100)}%
+          </span>
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col gap-1 p-3">
