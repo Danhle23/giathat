@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllProducts } from "@/lib/catalog";
 import { ARTICLES } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -12,6 +13,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: "daily" as const,
     priority: path === "" ? 1 : 0.7,
+  }));
+
+  const categoryRoutes = CATEGORIES.map((c) => ({
+    url: `${SITE_URL}/danh-muc/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.8,
   }));
 
   const productRoutes = products.map((p) => ({
@@ -28,5 +36,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...productRoutes, ...articleRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...productRoutes, ...articleRoutes];
 }

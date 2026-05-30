@@ -4,10 +4,9 @@ import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
 import { getAllProducts, getFakeDeals } from "@/lib/catalog";
+import { CATEGORIES } from "@/lib/categories";
 
 export const dynamic = "force-dynamic";
-
-const CATEGORIES = ["Kem chống nắng", "Serum", "Son", "Sữa rửa mặt", "Mặt nạ", "Nước hoa"];
 
 export default async function HomePage() {
   const [all, fakeDeals] = await Promise.all([getAllProducts(), getFakeDeals()]);
@@ -48,11 +47,11 @@ export default async function HomePage() {
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             {CATEGORIES.map((cat) => (
               <Link
-                key={cat}
-                href={`/tim-kiem?q=${encodeURIComponent(cat)}`}
+                key={cat.slug}
+                href={`/danh-muc/${cat.slug}`}
                 className="rounded-full border border-black/10 bg-white px-3 py-1 text-[12px] text-[#6e6e73] transition hover:border-[#0066cc]/40 hover:text-[#0066cc]"
               >
-                {cat}
+                {cat.emoji} {cat.label}
               </Link>
             ))}
           </div>

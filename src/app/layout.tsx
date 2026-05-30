@@ -3,9 +3,8 @@ import Link from "next/link";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { Logo } from "@/components/Logo";
 import { ARTICLES } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
 import "./globals.css";
-
-const FOOTER_CATEGORIES = ["Kem chống nắng", "Serum", "Son", "Sữa rửa mặt", "Mặt nạ", "Nước hoa"];
 
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
@@ -82,9 +81,9 @@ export default function RootLayout({
               </FooterCol>
 
               <FooterCol title="Danh mục">
-                {FOOTER_CATEGORIES.map((cat) => (
-                  <FooterLink key={cat} href={`/tim-kiem?q=${encodeURIComponent(cat)}`}>
-                    {cat}
+                {CATEGORIES.map((cat) => (
+                  <FooterLink key={cat.slug} href={`/danh-muc/${cat.slug}`}>
+                    {cat.label}
                   </FooterLink>
                 ))}
               </FooterCol>
