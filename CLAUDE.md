@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# Giá Thật — Project State & Handoff
+# Soi Giá — Project State & Handoff
 
 Web theo dõi **lịch sử giá mỹ phẩm Shopee**, phát hiện **giảm giá ảo**, kiếm tiền qua
 **affiliate AccessTrade**. Niche: **Làm đẹp / mỹ phẩm**.
