@@ -35,10 +35,10 @@ export async function generateMetadata({
 }
 
 const VERDICT_BANNER: Record<string, string> = {
-  REAL_DEAL: "border-emerald-500/30 bg-emerald-500/10",
-  GOOD: "border-sky-500/30 bg-sky-500/10",
-  NORMAL: "border-white/10 bg-white/[0.04]",
-  FAKE: "border-rose-500/30 bg-rose-500/10",
+  REAL_DEAL: "border-emerald-200 bg-emerald-50",
+  GOOD: "border-sky-200 bg-sky-50",
+  NORMAL: "border-black/[0.08] bg-[#f5f5f7]",
+  FAKE: "border-rose-200 bg-rose-50",
 };
 
 export default async function ProductPage({
@@ -80,95 +80,81 @@ export default async function ProductPage({
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-6">
+    <div className="mx-auto max-w-5xl px-5 py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav className="mb-4 text-sm text-slate-400">
-        <Link href="/" className="hover:text-[#8b5cf6]">Trang chủ</Link>
-        <span className="mx-1">/</span>
-        <span className="text-slate-500">{product.category}</span>
+      <nav className="mb-6 text-[13px] text-[#86868b]">
+        <Link href="/" className="hover:text-[#0066cc]">Trang chủ</Link>
+        <span className="mx-1.5">/</span>
+        <span className="text-[#6e6e73]">{product.category}</span>
       </nav>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-        <div className="space-y-5">
+      <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+        <div className="space-y-6">
           {/* Header */}
-          <div className="flex gap-4">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-white/10">
-              <ProductImage
-                src={product.image}
-                alt={product.name}
-                emoji={c.emoji}
-                gradient={`${c.from} ${c.to}`}
-              />
+          <div className="flex gap-5">
+            <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-2xl border border-black/[0.06] bg-[#f5f5f7]">
+              <ProductImage src={product.image} alt={product.name} emoji={c.emoji} gradient="from-[#f5f5f7] to-[#ececef]" />
             </div>
-            <div>
-              <h1 className="font-display text-2xl font-bold text-white">{product.name}</h1>
-              <p className="mt-1 text-sm text-slate-400">{product.shop}</p>
-              <p className="mt-1 text-xs text-slate-400">
-                ⭐ {product.rating.toFixed(1)} · Đã bán {compact(product.sold)}
-              </p>
+            <div className="min-w-0">
+              <h1 className="font-display text-2xl font-semibold leading-tight text-[#1d1d1f] sm:text-3xl">{product.name}</h1>
+              <p className="mt-1.5 text-[15px] text-[#6e6e73]">{product.shop}</p>
+              {(product.rating > 0 || product.sold > 0) && (
+                <p className="mt-1 text-[13px] text-[#86868b]">
+                  ⭐ {product.rating.toFixed(1)} · Đã bán {compact(product.sold)}
+                </p>
+              )}
             </div>
           </div>
 
           {/* Verdict banner */}
-          <div className={`rounded-xl border p-4 ${VERDICT_BANNER[verdict.kind]}`}>
-            <div className="flex items-center gap-2">
-              <VerdictBadge kind={verdict.kind} label={verdict.label} size="lg" />
-            </div>
-            <p className="mt-2 text-sm text-slate-300">{verdict.reason}</p>
+          <div className={`rounded-2xl border p-5 ${VERDICT_BANNER[verdict.kind]}`}>
+            <VerdictBadge kind={verdict.kind} label={verdict.label} size="lg" />
+            <p className="mt-2.5 text-[15px] text-[#1d1d1f]">{verdict.reason}</p>
           </div>
 
           {/* Price chart */}
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-            <h2 className="mb-2 text-sm font-semibold text-slate-300">
-              Lịch sử giá {stats.days} ngày
-            </h2>
+          <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
+            <h2 className="mb-3 text-[15px] font-semibold text-[#1d1d1f]">Lịch sử giá {stats.days} ngày</h2>
             <PriceChart history={product.history} current={product.currentPrice} />
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
-            <Stat label="Thấp nhất" value={vnd(stats.min)} accent="text-emerald-400" />
+          <div className="grid grid-cols-3 gap-4">
+            <Stat label="Thấp nhất" value={vnd(stats.min)} accent="text-emerald-600" />
             <Stat label="Trung bình" value={vnd(stats.typical)} />
-            <Stat label="Cao nhất" value={vnd(stats.max)} accent="text-rose-400" />
+            <Stat label="Cao nhất" value={vnd(stats.max)} accent="text-rose-600" />
           </div>
         </div>
 
         {/* Sidebar: buy + alert */}
         <aside className="space-y-4">
-          <div className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.04]">
-            {/* conversion ribbon (honest, data-driven) */}
+          <div className="overflow-hidden rounded-2xl border border-black/[0.08] bg-white">
             {stats.isLowest && (
-              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-1.5 text-center text-xs font-bold text-white">
+              <div className="bg-emerald-600 px-4 py-1.5 text-center text-[12px] font-semibold text-white">
                 🔥 GIÁ THẤP NHẤT {stats.days} NGÀY
               </div>
             )}
-            <div className="p-4">
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-[#a78bfa]">{vnd(product.currentPrice)}</span>
-              </div>
+            <div className="p-5">
+              <span className="text-[32px] font-semibold text-[#1d1d1f]">{vnd(product.currentPrice)}</span>
               {product.listedPrice > product.currentPrice && (
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-[14px] text-[#86868b]">
                   <span className="line-through">{vnd(product.listedPrice)}</span>{" "}
-                  <span className="text-rose-400">(shop ghi -{pct(stats.claimedDiscount)})</span>
+                  <span className="text-rose-600">(shop ghi −{pct(stats.claimedDiscount)})</span>
                 </p>
               )}
-              <p className="mt-2 text-sm">
+              <p className="mt-3 text-[14px]">
                 {real > 0 ? (
-                  <span className="font-semibold text-emerald-400">
-                    Rẻ hơn thật {real}% so với giá thường ngày
-                  </span>
+                  <span className="font-semibold text-emerald-600">Rẻ hơn thật {real}% so với giá thường ngày</span>
                 ) : (
-                  <span className="font-semibold text-rose-400">
-                    Không rẻ hơn giá thường ngày — cẩn thận giảm ảo
-                  </span>
+                  <span className="font-medium text-[#6e6e73]">Đang thu thập lịch sử giá để so sánh</span>
                 )}
               </p>
               {savings > 0 && (
-                <p className="mt-1 text-sm font-semibold text-slate-200">
-                  💰 Tiết kiệm {vnd(savings)} so với giá thường ngày
+                <p className="mt-1 text-[14px] font-semibold text-[#1d1d1f]">
+                  Tiết kiệm {vnd(savings)} so với giá thường ngày
                 </p>
               )}
 
@@ -176,21 +162,21 @@ export default async function ProductPage({
                 href={buyUrl}
                 target="_blank"
                 rel="nofollow sponsored noopener"
-                className="mt-4 block rounded-lg bg-[#8b5cf6] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#7c3aed]"
+                className="mt-5 block rounded-full bg-[#0066cc] px-4 py-3 text-center text-[15px] font-medium text-white transition active:scale-[0.98]"
               >
-                Mua trên Shopee →
+                Mua trên Shopee
               </a>
-              <p className="mt-2 text-center text-[11px] text-slate-400">
-                Liên kết tiếp thị · bạn không trả thêm phí · Dữ liệu giá cập nhật mỗi ngày
+              <p className="mt-2.5 text-center text-[11px] text-[#86868b]">
+                Liên kết tiếp thị · bạn không trả thêm phí
               </p>
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
             <ShareButtons url={productUrl} title={`${product.name} — ${vnd(product.currentPrice)} (${verdict.label})`} />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="rounded-2xl border border-black/[0.08] bg-white p-5">
             <AlertForm productId={product.id} />
           </div>
         </aside>
@@ -199,11 +185,11 @@ export default async function ProductPage({
   );
 }
 
-function Stat({ label, value, accent = "text-white" }: { label: string; value: string; accent?: string }) {
+function Stat({ label, value, accent = "text-[#1d1d1f]" }: { label: string; value: string; accent?: string }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-center">
-      <p className="text-xs text-slate-400">{label}</p>
-      <p className={`mt-1 text-sm font-bold ${accent}`}>{value}</p>
+    <div className="rounded-2xl border border-black/[0.08] bg-white p-4 text-center">
+      <p className="text-[12px] text-[#86868b]">{label}</p>
+      <p className={`mt-1 text-[14px] font-semibold ${accent}`}>{value}</p>
     </div>
   );
 }

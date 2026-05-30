@@ -38,7 +38,7 @@ export function CursorSpotlight() {
     >
       {pos && (
         <div
-          className="absolute h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b5cf6]/20 blur-3xl"
+          className="absolute h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0066cc]/20 blur-3xl"
           style={{ left: pos.x, top: pos.y }}
         />
       )}

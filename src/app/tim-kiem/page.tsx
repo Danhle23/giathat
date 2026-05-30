@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
-import { Tilt } from "@/components/Tilt";
 import { searchProducts } from "@/lib/catalog";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Tìm kiếm sản phẩm",
-  description: "Tìm và kiểm tra lịch sử giá sản phẩm Shopee.",
+  description: "Tìm và kiểm tra lịch sử giá mỹ phẩm Shopee.",
 };
 
 export default async function SearchPage({
@@ -19,30 +20,25 @@ export default async function SearchPage({
 
   return (
     <div>
-      {/* Header band */}
-      <section className="relative overflow-hidden border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="dot-grid-light absolute inset-0 opacity-60" />
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#8b5cf6]/20 blur-3xl" />
-        </div>
-        <div className="mx-auto max-w-2xl px-4 py-12 text-center">
-          <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Tra giá thật mọi sản phẩm Shopee
+      <section className="border-b border-black/5 bg-[#f5f5f7]">
+        <div className="mx-auto max-w-2xl px-5 py-16 text-center">
+          <h1 className="font-display text-3xl font-semibold text-[#1d1d1f] sm:text-4xl">
+            Tra giá thật trước khi mua
           </h1>
-          <p className="mt-2 text-slate-400">
+          <p className="mt-2 text-[17px] text-[#6e6e73]">
             Gõ tên sản phẩm để xem lịch sử giá &amp; biết deal thật hay giảm ảo.
           </p>
-          <div className="mx-auto mt-6 max-w-xl">
+          <div className="mx-auto mt-7 max-w-xl">
             <SearchBar initial={q} />
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        <p className="mb-4 text-sm text-slate-400">
+      <div className="mx-auto max-w-6xl px-5 py-10">
+        <p className="mb-5 text-[15px] text-[#6e6e73]">
           {q ? (
             <>
-              {results.length} kết quả cho <b className="text-white">“{q}”</b>
+              {results.length} kết quả cho <b className="text-[#1d1d1f]">“{q}”</b>
             </>
           ) : (
             <>Tất cả sản phẩm</>
@@ -50,16 +46,14 @@ export default async function SearchPage({
         </p>
 
         {results.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-white/15 bg-white/[0.03] p-12 text-center text-slate-400">
+          <div className="rounded-2xl border border-black/[0.08] bg-[#f5f5f7] p-16 text-center text-[#6e6e73]">
             <p className="text-3xl">🔍</p>
             <p className="mt-2">Không tìm thấy sản phẩm phù hợp. Thử từ khoá khác nhé.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {results.map((p) => (
-              <Tilt key={p.id}>
-                <ProductCard product={p} />
-              </Tilt>
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         )}

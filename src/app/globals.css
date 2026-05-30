@@ -2,160 +2,75 @@
 
 @theme inline {
   --font-sans: var(--font-sans);
-  --color-brand: #8b5cf6;
+  --color-brand: #0066cc;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-.font-display {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
-}
-
 body {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  color: #e7e9ee;
-  background:
-    radial-gradient(48rem 34rem at 88% -10%, rgba(139, 92, 246, 0.10), transparent 60%),
-    radial-gradient(42rem 34rem at 2% 4%, rgba(99, 102, 241, 0.07), transparent 55%),
-    #0a0913;
-  background-attachment: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui,
+    var(--font-sans), "Segoe UI", sans-serif;
+  color: #1d1d1f;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
 }
 
-.dot-grid {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-.dot-grid-light {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 20px 20px;
+/* Apple-tight display tracking for headlines */
+.font-display {
+  letter-spacing: -0.022em;
 }
 
-/* ---------- ambient motion ---------- */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-.animate-float-slow { animation: float-slow 9s ease-in-out infinite; }
-
-@keyframes float-slow-2 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(12px) translateX(-10px); }
-}
-.animate-float-slow-2 { animation: float-slow-2 11s ease-in-out infinite; }
-
-@keyframes float-slow-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(14px, 10px) scale(1.08); }
-}
-.animate-float-slow-3 { animation: float-slow-3 13s ease-in-out infinite; }
-
-@keyframes gradient-pan {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-.animate-gradient-pan {
-  background-size: 200% 200%;
-  animation: gradient-pan 5s ease-in-out infinite alternate;
+/* The single drop-shadow in the system — product imagery only */
+.shadow-product {
+  box-shadow: rgba(0, 0, 0, 0.18) 2px 4px 24px 0;
 }
 
-/* ---------- scroll reveal ---------- */
+/* subtle scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
 }
 .reveal.is-visible {
   animation: reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes reveal-up {
-  to { opacity: 1; transform: none; }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* ---------- self-drawing chart line ---------- */
+/* price-history chart draw-in */
 .chart-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw-line 1.5s ease-out 0.25s forwards;
-}
-@keyframes draw-line {
-  to { stroke-dashoffset: 0; }
+  animation: draw-line 1.4s ease-out 0.2s forwards;
 }
 .chart-fade {
   opacity: 0;
   animation: fade-in 0.8s ease-out 1.1s forwards;
 }
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 @keyframes fade-in {
-  to { opacity: 1; }
-}
-
-/* ---------- deal ticker (stock-style marquee) ---------- */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 38s linear infinite;
-}
-.marquee-pause:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
-/* ---------- detector demo card ---------- */
-.scan-line {
-  animation: scan-move 1.4s ease-in-out;
-}
-@keyframes scan-move {
-  0% { top: 0%; opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-.verdict-pop {
-  animation: verdict-pop 0.55s 0.55s both cubic-bezier(0.18, 1.25, 0.45, 1);
-}
-@keyframes verdict-pop {
-  from { opacity: 0; transform: scale(0.82) translateY(6px); }
-  to { opacity: 1; transform: none; }
-}
-.spark-draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: draw-line 1s ease-out 0.2s forwards;
-}
-
-/* ---------- toast pop-in ---------- */
-@keyframes toast-in {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: none; }
-}
-.toast-in {
-  animation: toast-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ---------- card sheen on hover ---------- */
-.card-sheen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
-  transform: translateX(-130%);
-  transition: transform 0.8s ease;
-  pointer-events: none;
-}
-.group:hover .card-sheen::before {
-  transform: translateX(130%);
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .chart-line, .chart-fade, .spark-draw {
+  .reveal,
+  .chart-line,
+  .chart-fade {
     opacity: 1 !important;
     transform: none !important;
     stroke-dashoffset: 0 !important;
-    animation: none !important;
-  }
-  .animate-float-slow, .animate-float-slow-2, .animate-float-slow-3,
-  .animate-gradient-pan, .animate-marquee, .scan-line, .verdict-pop, .toast-in {
     animation: none !important;
   }
 }

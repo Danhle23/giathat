@@ -36,21 +36,21 @@ export function TrackForm() {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Dán link sản phẩm Shopee vào đây…"
-        className="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8b5cf6]"
+        className="rounded-xl border border-black/10 bg-white px-4 py-3 text-[15px] text-[#1d1d1f] outline-none placeholder:text-[#86868b] focus:border-[#0066cc]"
         required
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="rounded-lg bg-[#8b5cf6] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#7c3aed] disabled:opacity-60"
+        className="rounded-full bg-[#0066cc] px-4 py-3 text-[15px] font-medium text-white transition active:scale-[0.98] disabled:opacity-60"
       >
         {status === "loading" ? "Đang xử lý…" : "Bắt đầu theo dõi giá"}
       </button>
       {status === "done" && (
-        <p className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-300">{message}</p>
+        <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-[14px] text-emerald-800">{message}</p>
       )}
       {status === "error" && (
-        <p className="rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-300">{message}</p>
+        <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-[14px] text-rose-700">{message}</p>
       )}
     </form>
   );

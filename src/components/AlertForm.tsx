@@ -28,7 +28,7 @@ export function AlertForm({ productId }: { productId: string }) {
 
   if (status === "done") {
     return (
-      <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-300">
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-[14px] text-emerald-800">
         ✅ Đã đăng ký! Chúng tôi sẽ email cho bạn ngay khi có <b>đợt giảm giá thật</b>.
       </div>
     );
@@ -36,8 +36,8 @@ export function AlertForm({ productId }: { productId: string }) {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-2">
-      <p className="text-sm text-slate-300">
-        🔔 Nhận email khi sản phẩm này <b className="text-white">giảm giá thật</b> (không tính giảm ảo):
+      <p className="text-[14px] text-[#6e6e73]">
+        🔔 Nhận email khi sản phẩm này <b className="text-[#1d1d1f]">giảm giá thật</b> (không tính giảm ảo):
       </p>
       <input
         type="email"
@@ -45,24 +45,24 @@ export function AlertForm({ productId }: { productId: string }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email của bạn"
-        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8b5cf6]"
+        className="rounded-xl border border-black/10 bg-white px-3 py-2.5 text-[14px] text-[#1d1d1f] outline-none placeholder:text-[#86868b] focus:border-[#0066cc]"
       />
       <input
         inputMode="numeric"
         value={target}
         onChange={(e) => setTarget(e.target.value)}
         placeholder="Giá mong muốn (VND) — để trống nếu cần báo mọi đợt giảm"
-        className="rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#8b5cf6]"
+        className="rounded-xl border border-black/10 bg-white px-3 py-2.5 text-[14px] text-[#1d1d1f] outline-none placeholder:text-[#86868b] focus:border-[#0066cc]"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-200 disabled:opacity-60"
+        className="rounded-full bg-[#0066cc] px-4 py-2.5 text-[14px] font-medium text-white transition active:scale-95 disabled:opacity-60"
       >
         {status === "loading" ? "Đang đăng ký…" : "Đăng ký cảnh báo giá"}
       </button>
       {status === "error" && (
-        <p className="text-xs text-rose-400">Có lỗi xảy ra, thử lại nhé.</p>
+        <p className="text-xs text-rose-600">Có lỗi xảy ra, thử lại nhé.</p>
       )}
     </form>
   );

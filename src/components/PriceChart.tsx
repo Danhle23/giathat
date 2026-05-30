@@ -51,20 +51,20 @@ export function PriceChart({
       >
         <defs>
           <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+            <stop offset="0%" stopColor="#0066cc" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#0066cc" stopOpacity="0" />
           </linearGradient>
         </defs>
 
         {/* typical (average) reference line */}
-        <line x1={padL} y1={typicalY} x2={width - padR} y2={typicalY} stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 4" />
-        <text x={padL + 2} y={typicalY - 5} fontSize="11" fontWeight={600} fill="#cbd5e1" stroke="#0a0913" strokeWidth={3} paintOrder="stroke">
+        <line x1={padL} y1={typicalY} x2={width - padR} y2={typicalY} stroke="#c7c7cc" strokeWidth="1" strokeDasharray="4 4" />
+        <text x={padL + 2} y={typicalY - 5} fontSize="11" fontWeight={600} fill="#6e6e73" stroke="#fff" strokeWidth={3} paintOrder="stroke">
           Giá thường ngày {vnd(typical)}
         </text>
 
         {/* all-time low reference line */}
         <line x1={padL} y1={minY} x2={width - padR} y2={minY} stroke="#10b981" strokeWidth="1" strokeDasharray="2 3" />
-        <text x={padL + 2} y={minY + 14} fontSize="11" fontWeight={600} fill="#34d399" stroke="#0a0913" strokeWidth={3} paintOrder="stroke">
+        <text x={padL + 2} y={minY + 14} fontSize="11" fontWeight={600} fill="#059669" stroke="#fff" strokeWidth={3} paintOrder="stroke">
           Thấp nhất {vnd(min)}
         </text>
 
@@ -72,7 +72,7 @@ export function PriceChart({
         <path
           d={line}
           fill="none"
-          stroke="#8b5cf6"
+          stroke="#0066cc"
           strokeWidth="2"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -81,9 +81,9 @@ export function PriceChart({
         />
 
         {/* current price marker */}
-        <circle cx={lastX} cy={lastY} r="4" fill="#8b5cf6" stroke="#fff" strokeWidth="1.5" className="chart-fade" />
+        <circle cx={lastX} cy={lastY} r="4" fill="#0066cc" stroke="#fff" strokeWidth="1.5" className="chart-fade" />
       </svg>
-      <figcaption className="mt-1 flex justify-between text-xs text-slate-400">
+      <figcaption className="mt-1 flex justify-between text-xs text-[#86868b]">
         <span>{viDate(history[0]?.date ?? "")}</span>
         <span>Hôm nay</span>
       </figcaption>

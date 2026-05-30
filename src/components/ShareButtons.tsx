@@ -38,11 +38,11 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
 
   return (
     <div>
-      <p className="mb-2 text-xs font-semibold text-slate-400">Chia sẻ deal này</p>
+      <p className="mb-2 text-[12px] font-semibold text-[#6e6e73]">Chia sẻ</p>
       <div className="flex flex-wrap gap-2">
         <button
           onClick={nativeShare}
-          className="rounded-lg bg-[#8b5cf6] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#7c3aed]"
+          className="rounded-full bg-[#0066cc] px-3 py-1.5 text-[12px] font-medium text-white transition active:scale-95"
         >
           ↗ Chia sẻ
         </button>
@@ -52,14 +52,14 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
             href={l.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`rounded-lg ${l.color} px-3 py-2 text-xs font-semibold text-white transition hover:opacity-90`}
+            className={`rounded-full ${l.color} px-3 py-1.5 text-[12px] font-medium text-white transition active:scale-95`}
           >
             {l.label}
           </a>
         ))}
         <button
           onClick={copy}
-          className="rounded-lg border border-white/15 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-white/5"
+          className="rounded-full border border-black/15 px-3 py-1.5 text-[12px] font-medium text-[#1d1d1f] transition hover:bg-[#f5f5f7]"
         >
           {copied ? "✓ Đã copy" : "Copy link"}
         </button>

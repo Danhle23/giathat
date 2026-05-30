@@ -85,18 +85,18 @@ export function DetectorDemo() {
   return (
     <div className="relative w-full max-w-sm">
       {/* glow */}
-      <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-[#8b5cf6]/15 to-violet-300/15 blur-2xl" />
+      <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-[#0066cc]/15 to-violet-300/15 blur-2xl" />
 
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
         {/* scanning beam — restarts every cycle via key */}
         <div
           key={i}
-          className="scan-line pointer-events-none absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent"
+          className="scan-line pointer-events-none absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#0066cc] to-transparent"
           style={{ boxShadow: "0 0 14px 2px rgba(139,92,246,0.55)" }}
         />
 
         <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#8b5cf6]" />
+          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#0066cc]" />
           Đang soi giá…
         </div>
 
@@ -114,7 +114,7 @@ export function DetectorDemo() {
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-white">{d.name}</p>
             <div className="mt-0.5 flex items-center gap-2">
-              <span className="text-lg font-extrabold text-[#a78bfa]">{vnd(d.current)}</span>
+              <span className="text-lg font-extrabold text-[#0066cc]">{vnd(d.current)}</span>
               <span className="text-xs text-slate-500 line-through">{vnd(d.listed)}</span>
               <span className="rounded bg-rose-500 px-1 py-0.5 text-[10px] font-bold text-white">
                 shop ghi -{advertised}%
@@ -160,7 +160,7 @@ export function DetectorDemo() {
             <span
               key={idx}
               className={`h-1.5 rounded-full transition-all ${
-                idx === i ? "w-5 bg-[#a78bfa]" : "w-1.5 bg-white/20"
+                idx === i ? "w-5 bg-[#0066cc]" : "w-1.5 bg-white/20"
               }`}
             />
           ))}
