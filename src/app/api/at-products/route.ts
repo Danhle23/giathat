@@ -21,7 +21,11 @@ export async function GET() {
       ORDER BY p.updated_at DESC
       LIMIT 3
     `;
-    return NextResponse.json({ ok: true, products: count, sample: rows });
+    const cats = await sql`
+      SELECT category, count(*)::int AS n FROM products
+      GROUP BY category ORDER BY n DESC LIMIT 20
+    `;
+    return NextResponse.json({ ok: true, products: count, categories: cats, sample: rows });
   } catch (e) {
     return NextResponse.json({ ok: false, error: String(e) }, { status: 500 });
   }
