@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { Product } from "./types";
 import { PRODUCTS } from "./seed";
 import { computeStats, getVerdict } from "./pricing";
@@ -54,8 +55,6 @@ function mapRow(r: ProductRow, snaps: SnapRow[]): Product {
   };
 }
 
-let _cache: { at: number; products: Product[] } | null = null;
-const TTL_MS = 5 * 60 * 1000;
 
 async function loadFromDb(): Promise<Product[] | null> {
   if (!isDbConfigured()) return null;
@@ -84,13 +83,13 @@ async function loadFromDb(): Promise<Product[] | null> {
   }
 }
 
-export async function getCatalog(): Promise<Product[]> {
-  if (_cache && Date.now() - _cache.at < TTL_MS) return _cache.products;
+// Memoized per server request (dedupes the many catalog reads from
+// layout/home/ticker into one DB query) — fresh across requests, so a sync
+// is reflected immediately with no stale 5-minute window.
+export const getCatalog = cache(async (): Promise<Product[]> => {
   const db = await loadFromDb();
-  const products = db ?? PRODUCTS;
-  _cache = { at: Date.now(), products };
-  return products;
-}
+  return db ?? PRODUCTS;
+});
 
 export async function getAllProducts(): Promise<Product[]> {
   return getCatalog();
