@@ -80,8 +80,16 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           >
             DANH MỤC
           </div>
-          <div style={{ fontSize: "68px", fontWeight: 700, color: "#1d1d1f", lineHeight: 1.1 }}>
-            Giá {cat.label.toLowerCase()} Shopee
+          <div
+            style={{
+              display: "flex",
+              fontSize: "68px",
+              fontWeight: 700,
+              color: "#1d1d1f",
+              lineHeight: 1.1,
+            }}
+          >
+            {`Giá ${cat.label.toLowerCase()} Shopee`}
           </div>
           <div style={{ display: "flex", marginTop: "20px", fontSize: "30px", color: "#6e6e73" }}>
             {range
