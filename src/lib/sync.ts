@@ -23,7 +23,14 @@ function norm(s: string): string {
 
 // Beauty & personal-care keywords (matched against the accent-stripped name).
 const BEAUTY_RE =
-  /kem chong nang|kem duong|kem nen|kem mat|kem body|kem tay|kem tri|sua rua mat|sua tam|tay trang|tay te bao|serum|tinh chat|toner|nuoc hoa hong|mat na|son moi|son li|son kem|son tint|son duong|son thoi|son bong|phan phu|phan nuoc|phan ma|cushion|che khuyet diem|ke may|chi may|mascara|nuoc hoa|duong the|duong da|duong moi|duong toc|dau goi|tri mun|collagen|retinol|niacinamide|vitamin c|my pham|skincare|lam dep|xit khoang|se khit|cap am|nam da|tan nhang|gel rua|bb cream|cc cream|foundation|concealer|highlight|cleanser|moisturizer|lipstick|skin|beauty/;
+  /chong nang|kem duong|kem nen|kem mat|kem body|kem tay|kem tri|sua rua mat|sua tam|tay trang|tay te bao|serum|tinh chat|toner|nuoc hoa hong|mat na|son moi|son li|son kem|son tint|son duong|son thoi|son bong|phan phu|phan nuoc|phan ma|cushion|che khuyet diem|ke may|chi may|mascara|nuoc hoa|duong the|duong da|duong moi|duong toc|dau goi|tri mun|collagen|retinol|niacinamide|vitamin c|my pham|skincare|lam dep|xit khoang|se khit|cap am|nam da|tan nhang|gel rua|bb cream|cc cream|foundation|concealer|highlight|cleanser|moisturizer|lipstick|skin|beauty/;
+
+// Hard reject — homonyms/near-misses that slip past BEAUTY_RE but are NOT
+// cosmetics: motorbike "mặt nạ" (fairings) and furniture "kệ/khay/tủ đựng mỹ
+// phẩm". Phrases are specific so real cosmetics aren't caught (e.g. "kẻ mày"
+// = "ke may" ≠ "ke dung"; "mặt nạ ngủ" has no honda/ốp/trước token).
+const EXCLUDE_RE =
+  /honda|yamaha|suzuki|piaggio|vespa|winner|exciter|air ?blade|future neo|wave |rs150|vario|nvx|sirius|jupiter|sh mode|xe may|xe ga|phu tung|nhua op|op mat na|mat na truoc|mat na dau|mat na sau|yem xe|pat gia|bat mat na|ke dung|ke my pham|ke mi pham|ke trang diem|khay dung|khay son|tu dung|hop dung|ngan keo|ban trang diem|do choi|dien thoai|op lung|cap sac|tai nghe/;
 
 function curate(items: DatafeedItem[]) {
   const seen = new Set<string>();
@@ -33,7 +40,9 @@ function curate(items: DatafeedItem[]) {
       if (!id || seen.has(id)) return false;
       if (!it.image || !it.name) return false;
       if (it.price < MIN_PRICE || it.price > MAX_PRICE) return false;
-      if (!BEAUTY_RE.test(norm(it.name))) return false; // niche filter
+      const name = norm(it.name);
+      if (EXCLUDE_RE.test(name)) return false; // drop motorbike/furniture homonyms
+      if (!BEAUTY_RE.test(name)) return false; // niche filter
       seen.add(id);
       return true;
     })
