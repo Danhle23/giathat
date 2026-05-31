@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllProducts } from "@/lib/catalog";
 import { ARTICLES } from "@/lib/articles";
 import { CATEGORIES } from "@/lib/categories";
+import { getBrandsInCatalog } from "@/lib/brands";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -22,6 +23,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Only brands that actually have products — never expose empty brand pages.
+  const brandRoutes = getBrandsInCatalog(products).map(({ brand }) => ({
+    url: `${SITE_URL}/thuong-hieu/${brand.slug}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.7,
+  }));
+
   const productRoutes = products.map((p) => ({
     url: `${SITE_URL}/san-pham/${p.id}`,
     lastModified: now,
@@ -36,5 +45,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...productRoutes, ...articleRoutes];
+  return [
+    ...staticRoutes,
+    ...categoryRoutes,
+    ...brandRoutes,
+    ...productRoutes,
+    ...articleRoutes,
+  ];
 }

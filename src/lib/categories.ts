@@ -1,3 +1,7 @@
+import type { Product } from "./types";
+import { vnd } from "./format";
+import { normalize } from "./text";
+
 /**
  * Beauty categories for programmatic SEO landing pages (/danh-muc/[slug]).
  * Each slug maps to a Vietnamese keyword fed into `searchProducts` to filter
@@ -91,4 +95,57 @@ export const CATEGORIES: CategoryDef[] = [
 
 export function getCategory(slug: string): CategoryDef | undefined {
   return CATEGORIES.find((c) => c.slug === slug);
+}
+
+/** Live price range across a set of products (uses current selling price). */
+export interface PriceRange {
+  count: number;
+  low: number;
+  high: number;
+}
+
+export function priceRange(products: Product[]): PriceRange | null {
+  const prices = products.map((p) => p.currentPrice).filter((n) => n > 0);
+  if (!prices.length) return null;
+  return { count: products.length, low: Math.min(...prices), high: Math.max(...prices) };
+}
+
+/**
+ * Infer which SEO category a product belongs to by matching the category
+ * keyword against the (diacritic-insensitive) product name. Used for the
+ * product-page breadcrumb and "related products" section.
+ */
+export function inferCategory(product: Product): CategoryDef | undefined {
+  const name = normalize(product.name);
+  return CATEGORIES.find((c) => name.includes(normalize(c.keyword)));
+}
+
+export interface Faq {
+  q: string;
+  a: string;
+}
+
+/** Build keyword-rich FAQ (also emitted as FAQPage JSON-LD) for a category. */
+export function categoryFaq(cat: CategoryDef, range: PriceRange | null): Faq[] {
+  const label = cat.label.toLowerCase();
+  return [
+    {
+      q: `Giá ${label} trên Shopee khoảng bao nhiêu?`,
+      a: range
+        ? `Soi Giá đang theo dõi ${range.count} sản phẩm ${label}, mức giá phổ biến từ ${vnd(
+            range.low,
+          )} đến ${vnd(
+            range.high,
+          )} tuỳ thương hiệu và dung tích. Quan trọng hơn con số là việc đối chiếu với lịch sử giá của chính sản phẩm đó.`
+        : `Giá ${label} trên Shopee dao động khá rộng tuỳ thương hiệu và dung tích. Hãy đối chiếu giá hôm nay với lịch sử giá của chính sản phẩm để biết có đang ở vùng giá tốt hay không.`,
+    },
+    {
+      q: `${cat.label} nào đáng mua?`,
+      a: `Loại ${label} đáng mua là loại hợp nhu cầu/loại da của bạn và đang ở vùng giá thấp so với lịch sử giá của nó — không phải loại có % giảm to nhất. Xem lưới sản phẩm bên trên, ưu tiên món gắn nhãn “Deal thật”.`,
+    },
+    {
+      q: `Làm sao biết ${label} giảm giá thật hay giảm ảo?`,
+      a: `Đừng tin con số % giảm do shop tự đặt. Soi Giá lưu lịch sử giá theo từng ngày: nếu giá hôm nay chạm vùng thấp nhất là deal thật, còn nếu vẫn bằng giá thường ngày dù treo biển “giảm sốc” thì đó là giảm ảo.`,
+    },
+  ];
 }

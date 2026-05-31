@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProduct } from "@/lib/catalog";
+import { getProduct, searchProducts } from "@/lib/catalog";
 import { computeStats, getVerdict, genuineDiscountPct, pct } from "@/lib/pricing";
 import { shopee } from "@/lib/shopee/provider";
 import { vnd, compact } from "@/lib/format";
 import { getCategoryVisual } from "@/lib/category";
+import { inferCategory } from "@/lib/categories";
 import { PriceChart } from "@/components/PriceChart";
+import { ProductCard } from "@/components/ProductCard";
 import { VerdictBadge } from "@/components/VerdictBadge";
 import { AlertForm } from "@/components/AlertForm";
 import { ProductImage } from "@/components/ProductImage";
@@ -58,6 +60,36 @@ export default async function ProductPage({
   const productUrl = `${SITE_URL}/san-pham/${product.id}`;
   const savings = Math.max(0, stats.typical - stats.current);
 
+  // SEO category (for breadcrumb + related products)
+  const cat = inferCategory(product);
+  const related = cat
+    ? (await searchProducts(cat.keyword)).filter((p) => p.id !== product.id).slice(0, 4)
+    : [];
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Trang chủ", item: SITE_URL },
+      ...(cat
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: cat.label,
+              item: `${SITE_URL}/danh-muc/${cat.slug}`,
+            },
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: cat ? 3 : 2,
+        name: product.name,
+        item: productUrl,
+      },
+    ],
+  };
+
   const jsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
@@ -85,10 +117,20 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <nav className="mb-6 text-[13px] text-[#86868b]">
         <Link href="/" className="hover:text-[#0066cc]">Trang chủ</Link>
         <span className="mx-1.5">/</span>
-        <span className="text-[#6e6e73]">{product.category}</span>
+        {cat ? (
+          <Link href={`/danh-muc/${cat.slug}`} className="hover:text-[#0066cc]">
+            {cat.label}
+          </Link>
+        ) : (
+          <span className="text-[#6e6e73]">{product.category}</span>
+        )}
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
@@ -181,6 +223,28 @@ export default async function ProductPage({
           </div>
         </aside>
       </div>
+
+      {/* Related products (same category) */}
+      {related.length > 0 && cat && (
+        <section className="mt-14">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="font-display text-2xl font-semibold text-[#1d1d1f]">
+              {cat.label} khác
+            </h2>
+            <Link
+              href={`/danh-muc/${cat.slug}`}
+              className="shrink-0 text-[14px] font-medium text-[#0066cc]"
+            >
+              Xem tất cả ›
+            </Link>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {related.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

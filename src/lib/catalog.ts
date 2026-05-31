@@ -3,6 +3,7 @@ import type { Product } from "./types";
 import { PRODUCTS } from "./seed";
 import { computeStats, getVerdict } from "./pricing";
 import { getSql, isDbConfigured } from "./db";
+import { normalize } from "./text";
 
 /**
  * Catalog data layer. Reads real products from Postgres when available,
@@ -109,15 +110,6 @@ export async function getProduct(id: string): Promise<Product | undefined> {
   } catch {
     return undefined;
   }
-}
-
-function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/đ/g, "d")
-    .trim();
 }
 
 export async function searchProducts(query: string): Promise<Product[]> {

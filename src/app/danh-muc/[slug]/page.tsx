@@ -3,7 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/ProductCard";
 import { searchProducts } from "@/lib/catalog";
-import { CATEGORIES, getCategory } from "@/lib/categories";
+import { computeStats, getVerdict } from "@/lib/pricing";
+import { vnd, viDate } from "@/lib/format";
+import {
+  CATEGORIES,
+  getCategory,
+  priceRange,
+  categoryFaq,
+} from "@/lib/categories";
+import { getBrandsInCatalog } from "@/lib/brands";
 
 export const dynamic = "force-dynamic";
 
@@ -17,15 +25,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const cat = getCategory(slug);
   if (!cat) return { title: "Không tìm thấy danh mục" };
+
+  const range = priceRange(await searchProducts(cat.keyword));
+  const description = range
+    ? `${cat.description} Giá từ ${vnd(range.low)}, ${range.count} sản phẩm có lịch sử giá thật.`
+    : cat.description;
+
   return {
     title: cat.title,
-    description: cat.description,
+    description,
     alternates: { canonical: `/danh-muc/${cat.slug}` },
-    openGraph: {
-      title: cat.title,
-      description: cat.description,
-      type: "website",
-    },
+    openGraph: { title: cat.title, description, type: "website" },
   };
 }
 
@@ -42,7 +52,15 @@ export default async function CategoryPage({
   const others = CATEGORIES.filter((c) => c.slug !== cat.slug);
   const label = cat.label.toLowerCase();
 
-  const jsonLd = {
+  const range = priceRange(products);
+  const realDeals = products.filter((p) => {
+    const k = getVerdict(computeStats(p)).kind;
+    return k === "REAL_DEAL" || k === "GOOD";
+  }).length;
+  const brandsHere = getBrandsInCatalog(products).slice(0, 12);
+  const faq = categoryFaq(cat, range);
+
+  const collectionLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: cat.title,
@@ -72,11 +90,25 @@ export default async function CategoryPage({
     },
   };
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
       <section className="border-b border-black/5 bg-[#f5f5f7]">
@@ -94,6 +126,16 @@ export default async function CategoryPage({
           <p className="mx-auto mt-3 max-w-2xl text-[16px] leading-relaxed text-[#6e6e73]">
             {cat.intro}
           </p>
+
+          {/* Live price stats */}
+          {range && (
+            <div className="mx-auto mt-7 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+              <Stat label="Sản phẩm" value={String(range.count)} />
+              <Stat label="Giá thấp nhất" value={vnd(range.low)} accent="text-emerald-600" />
+              <Stat label="Giá cao nhất" value={vnd(range.high)} />
+              <Stat label="Đang là deal thật" value={String(realDeals)} accent="text-[#0066cc]" />
+            </div>
+          )}
         </div>
       </section>
 
@@ -112,7 +154,8 @@ export default async function CategoryPage({
         </div>
 
         <p className="mb-5 text-[15px] text-[#6e6e73]">
-          <b className="text-[#1d1d1f]">{products.length}</b> sản phẩm {label} — kèm lịch sử giá thật
+          <b className="text-[#1d1d1f]">{products.length}</b> sản phẩm {label} — cập nhật{" "}
+          {viDate(new Date().toISOString().slice(0, 10))}
         </p>
 
         {products.length === 0 ? (
@@ -133,6 +176,42 @@ export default async function CategoryPage({
           </div>
         )}
 
+        {/* Brands present in this category */}
+        {brandsHere.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-[17px] font-semibold text-[#1d1d1f]">
+              Thương hiệu {label} phổ biến
+            </h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {brandsHere.map(({ brand }) => (
+                <Link
+                  key={brand.slug}
+                  href={`/thuong-hieu/${brand.slug}`}
+                  className="rounded-full border border-black/10 bg-white px-3 py-1 text-[13px] text-[#6e6e73] transition hover:border-[#0066cc]/40 hover:text-[#0066cc]"
+                >
+                  {brand.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* FAQ */}
+        <div className="mt-12">
+          <h2 className="font-display text-2xl font-semibold text-[#1d1d1f]">Câu hỏi thường gặp</h2>
+          <div className="mt-4 space-y-3">
+            {faq.map((f) => (
+              <div
+                key={f.q}
+                className="rounded-2xl border border-black/[0.08] bg-white p-5"
+              >
+                <p className="text-[15px] font-semibold text-[#1d1d1f]">{f.q}</p>
+                <p className="mt-1.5 text-[14px] leading-relaxed text-[#6e6e73]">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-12 rounded-2xl border border-black/[0.08] bg-[#f5f5f7] p-6 text-center">
           <p className="text-[15px] font-semibold text-[#1d1d1f]">
             Đừng để “giảm 50%” đánh lừa
@@ -149,6 +228,23 @@ export default async function CategoryPage({
           </Link>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  accent = "text-[#1d1d1f]",
+}: {
+  label: string;
+  value: string;
+  accent?: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-black/[0.08] bg-white p-4 text-center">
+      <p className="text-[12px] text-[#86868b]">{label}</p>
+      <p className={`mt-1 text-[15px] font-semibold ${accent}`}>{value}</p>
     </div>
   );
 }
