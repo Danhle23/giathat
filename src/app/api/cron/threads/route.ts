@@ -1,22 +1,17 @@
 import { NextResponse } from "next/server";
-import { postDealsToTelegram } from "@/lib/telegram";
 import { postDealsToThreads } from "@/lib/threads";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 /**
- * Daily "post today's deals to social" job (Vercel Cron).
- *
- * Posts to BOTH Telegram and Threads in one run, so we don't need a separate
- * Vercel cron entry (Hobby plan caps cron jobs at 2). Each channel is gated by
- * its own switch — TELEGRAM_BOT_ENABLED / THREADS_ENABLED — so it stays silent
- * until you turn that channel on. Threads can also be triggered on its own via
- * GET /api/cron/threads for manual testing.
+ * Daily job (Vercel Cron) that posts genuine deals to Threads (Meta).
  *
  * Security: if CRON_SECRET is set, the request must carry it either as
  * `Authorization: Bearer <CRON_SECRET>` (Vercel Cron does this automatically)
  * or `?secret=<CRON_SECRET>` (handy for a manual test in the browser).
+ *
+ * Stays silent until THREADS_ENABLED=true — so this is safe to deploy now.
  */
 export async function GET(req: Request) {
   const secret = process.env.CRON_SECRET;
@@ -28,9 +23,6 @@ export async function GET(req: Request) {
     }
   }
 
-  const [telegram, threads] = await Promise.all([
-    postDealsToTelegram(),
-    postDealsToThreads(),
-  ]);
-  return NextResponse.json({ ok: true, telegram, threads });
+  const result = await postDealsToThreads();
+  return NextResponse.json(result);
 }
