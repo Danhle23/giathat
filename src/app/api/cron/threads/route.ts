@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { postDealsToThreads } from "@/lib/threads";
+import { postDealsToThreads, postTestThread } from "@/lib/threads";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -11,18 +11,24 @@ export const maxDuration = 60;
  * `Authorization: Bearer <CRON_SECRET>` (Vercel Cron does this automatically)
  * or `?secret=<CRON_SECRET>` (handy for a manual test in the browser).
  *
- * Stays silent until THREADS_ENABLED=true — so this is safe to deploy now.
+ * Normal run stays silent until THREADS_ENABLED=true.
+ * `?test=1` does ONE safe intro post (homepage link only, no affiliate link)
+ * ignoring THREADS_ENABLED — to verify the token works. Still secret-gated.
  */
 export async function GET(req: Request) {
   const secret = process.env.CRON_SECRET;
+  const url = new URL(req.url);
   if (secret) {
     const auth = req.headers.get("authorization");
-    const qs = new URL(req.url).searchParams.get("secret");
+    const qs = url.searchParams.get("secret");
     if (auth !== `Bearer ${secret}` && qs !== secret) {
       return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
     }
   }
 
-  const result = await postDealsToThreads();
+  const result =
+    url.searchParams.get("test") === "1"
+      ? await postTestThread()
+      : await postDealsToThreads();
   return NextResponse.json(result);
 }

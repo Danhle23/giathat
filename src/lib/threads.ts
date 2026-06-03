@@ -83,6 +83,34 @@ export async function publishTextPost(text: string) {
   return publishContainer(userId, token, creation.id);
 }
 
+/**
+ * Manual, secret-gated TEST post. Ignores THREADS_ENABLED on purpose so we can
+ * verify the token works before the daily job is switched on. Posts a single
+ * safe intro thread that links ONLY to the site homepage (which works) — never
+ * an affiliate link (those still 404 until the campaign is approved).
+ */
+export async function postTestThread(custom?: string) {
+  const userId = process.env.THREADS_USER_ID || "me";
+  const token = process.env.THREADS_TOKEN;
+  if (!token) return { ok: false, reason: "missing_config" };
+
+  const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://giathat.vercel.app").replace(/\/$/, "");
+  const text =
+    custom ??
+    `🔎 Soi Giá — tra lịch sử giá mỹ phẩm Shopee, bắt "giảm giá ảo" trước khi mua.\n` +
+      `Xem giá thật từng ngày để biết deal nào xịn, deal nào ảo.\n` +
+      `👉 ${site}\n\n#GiaThat #SanDeal #Shopee #LamDep`;
+
+  const creation = await graph(`${GRAPH}/${userId}/threads`, {
+    media_type: "TEXT",
+    text,
+    access_token: token,
+  });
+  if (!creation?.id) return { ok: false, step: "create", error: creation };
+  const res = await publishContainer(userId, token, creation.id);
+  return { ...res, text };
+}
+
 async function publishImagePost(userId: string, token: string, imageUrl: string, text: string) {
   // 1) create container
   const creation = await graph(`${GRAPH}/${userId}/threads`, {
