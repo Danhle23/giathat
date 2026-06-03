@@ -27,7 +27,9 @@ import { vnd } from "./format";
 const GRAPH = "https://graph.threads.net/v1.0";
 
 export async function postDealsToThreads(limit = 3) {
-  const userId = process.env.THREADS_USER_ID;
+  // Threads Graph API accepts the alias "me" for the authenticated user, so a
+  // token alone is enough; THREADS_USER_ID is an optional override.
+  const userId = process.env.THREADS_USER_ID || "me";
   const token = process.env.THREADS_TOKEN;
   const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
 
@@ -36,7 +38,7 @@ export async function postDealsToThreads(limit = 3) {
   if (process.env.THREADS_ENABLED !== "true") {
     return { ok: false, reason: "disabled", posted: 0 };
   }
-  if (!userId || !token) {
+  if (!token) {
     return { ok: false, reason: "missing_config", posted: 0 };
   }
 
@@ -67,10 +69,10 @@ export async function postDealsToThreads(limit = 3) {
 
 /** Publish a single text post (no image) to Threads. */
 export async function publishTextPost(text: string) {
-  const userId = process.env.THREADS_USER_ID;
+  const userId = process.env.THREADS_USER_ID || "me";
   const token = process.env.THREADS_TOKEN;
   if (process.env.THREADS_ENABLED !== "true") return { ok: false, reason: "disabled" };
-  if (!userId || !token) return { ok: false, reason: "missing_config" };
+  if (!token) return { ok: false, reason: "missing_config" };
 
   const creation = await graph(`${GRAPH}/${userId}/threads`, {
     media_type: "TEXT",
