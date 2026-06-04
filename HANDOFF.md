@@ -91,3 +91,59 @@ tương tự `threads.ts`, gọi thêm trong `/api/cron/telegram`. Chưa làm.
 - **AccessTrade duyệt campaign Shopee** — đã ~2-3 ngày chưa duyệt. Link `go.isclix.com`
   còn 404 cho tới khi duyệt. Nên chủ động hỏi support AccessTrade (nút Support / chat).
 - Cần vài ngày cron tích lũy lịch sử giá → verdict "giảm ảo" mới chính xác.
+
+---
+
+## 5) Affiliate qua MXH Threads (ĐANG LÀM — kênh kiếm tiền chính hiện tại)
+
+**Phát hiện quan trọng:** Shopee Affiliate của Danh ĐÃ DUYỆT, đang chạy, đã có hoa hồng
+(~50k). Lấy link tại `affiliate.shopee.vn` → "Hoa hồng Sản phẩm" hoặc "Custom Link" →
+ra link dạng `s.shopee.vn/xxxx` (gắn Sub_id `SoiGia` để tracking). Đây là kênh ăn tiền
+THẬT, độc lập với AccessTrade. (Open API + Product Feed của Shopee thì CHƯA được cấp
+quyền → chưa tự động hằng ngày qua server được; hiện làm thủ công qua Cowork.)
+
+**Tài khoản Threads:** muadinhbanday (Grimm) — ~373 follower, vài nghìn view/bài.
+Bio đã sửa: "Soi lịch sử giá trước khi mua, né giảm giá ảo / Mách deal làm đẹp & đồ
+dùng đáng tiền / Link xịn ở dưới 👇". Link bio: giathat.vercel.app.
+
+### Quy tắc đăng CHỐNG BÓP TƯƠNG TÁC (Threads 2026) — BẮT BUỘC tuân thủ
+1. **KHÔNG để link affiliate trong thân bài.** Link luôn đặt ở **bài 2/comment đầu**
+   của chuỗi thread (dùng "Add to thread" khi soạn, hoặc reply chính bài sau khi đăng).
+   Lý do: Meta dìm mạnh bài có link dẫn ra ngoài.
+2. Câu đầu phải "chặn tay lướt" (feed chỉ hiện ~1 dòng đầu).
+3. Threads chấm điểm REPLY > like → kết bài bằng câu hỏi.
+4. Giới hạn 500 ký tự/bài. Nếu hiện "-100" cạnh nút Post = đang dư 100 ký tự, phải cắt.
+5. Giọng văn ĐỜI THƯỜNG, slang, ít emoji rao hàng, bỏ dấu hai chấm, đừng học thuật,
+   đừng "AI quá". (Đây là yêu cầu rõ ràng của Danh.)
+
+### Quy tắc COMMENT DẠO (comment marketing) — BẮT BUỘC
+- **TUYỆT ĐỐI không thả link** trong comment bài người khác (= cờ spam, bị bóp/khóa).
+  Link chỉ nằm ở bio. Comment để gây chú ý → người ta bấm vào profile → thấy bio.
+- **KHÔNG bịa trải nghiệm cá nhân** ("mình xài rồi", "mình mua rồi") khi chưa thật sự
+  dùng → KHÔNG trung thực, classifier sẽ chặn, và mất uy tín. (Đã từng mắc lỗi này,
+  phải xóa & đăng lại.)
+- Comment ĐÚNG VAI "người soi giá": góp ý về giá ("mấy món hot hay bị đẩy giá lúc đông
+  người, nhớ soi giá tí"), hỏi gợi chuyện, khen có thật.
+- Tối đa ~3 comment dạo/lần + 1 bài/lần, giãn cách. Đừng spam.
+
+### Chiến lược nội dung (xoay vòng, rút ra từ quan sát feed)
+Chủ đề đang hot trên Threads VN: skincare (brand tuyển UGC 200k/post), thủ thuật săn
+sale Shopee (gạt xu/flash sale), bài kể chuyện/than thở (kéo comment cảm xúc).
+Format thắng = **bóc phốt + mẹo**, KHÔNG quảng cáo lộ liễu. Luân phiên:
+1. Bóc phốt "giảm giá ảo" (thế mạnh brand) — vd bài ghế công thái học Sihoo đã đăng.
+2. Mẹo săn sale Shopee (dễ viral).
+3. Review thật có khen có chê (tạo niềm tin).
+4. Kể chuyện mua hớ (kéo comment).
+→ Mỗi bài đính 1 link `s.shopee.vn` ở comment. Skincare ↔ đồ công nghệ luân phiên.
+
+### Đã đăng (tính tới 2026-06-03)
+- Bài Torriden kem gel dưỡng ẩm (s.shopee.vn/8fPh8nXnrf) — link trong thân (bài cũ,
+  chưa tối ưu).
+- Chuỗi bài ghế công thái học Sihoo M57 (s.shopee.vn/9pbeiWtYby) — link ở comment 2/2,
+  CHUẨN format chống bóp. Giọng đời thường.
+- 2 comment dạo: bài KOL @quachanhmakeupartist (makeup), bài @g14.hwn9 (săn sale).
+
+### Link affiliate đã tạo sẵn (Sub_id=SoiGia, ăn hoa hồng)
+- Torriden Kem gel số 1 (HH 19%, 100k+ bán): s.shopee.vn/8fPh8nXnrf
+- Sihoo M57 ghế công thái học (HH 9%, ~4.77tr): s.shopee.vn/9pbeiWtYby
+- (CM24 nước hoa, SKIN1004 chống nắng: đã tick chọn, lấy lại link trong Hoa hồng Sản phẩm)
