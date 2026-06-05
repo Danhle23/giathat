@@ -147,3 +147,28 @@ Format thắng = **bóc phốt + mẹo**, KHÔNG quảng cáo lộ liễu. Luân
 - Torriden Kem gel số 1 (HH 19%, 100k+ bán): s.shopee.vn/8fPh8nXnrf
 - Sihoo M57 ghế công thái học (HH 9%, ~4.77tr): s.shopee.vn/9pbeiWtYby
 - (CM24 nước hoa, SKIN1004 chống nắng: đã tick chọn, lấy lại link trong Hoa hồng Sản phẩm)
+
+### Nhật ký + kết quả (cập nhật 2026-06-03, phiên 2)
+- Đã đăng thêm bài "mẹo săn sale" (thân bài không link, link Torriden ở comment 2/2).
+- Đã comment dạo 3 bài, tất cả ĐÚNG VAI soi giá, không link, không bịa:
+  1. @quachanhmakeupartist (KOL makeup, 6.4K view) — góp ý về giá
+  2. @g14.hwn9 (săn sale Shopee) — bổ sung mẹo soi giá → **tác giả ĐÃ LIKE comment**
+  3. @annie_nguyen2093 (hỏi review kcn cho da mụn) — tư vấn + lồng soi giá
+- KẾT QUẢ tương tác (xem trong Activity): g14.hwn9 like comment; có 1 follow mới
+  (trungranahihi._). Tài khoản ~373 follower, ~3.4K view/profile.
+- Đã follow tocobo.vn (TOCOBO — brand kcn Hàn) để feed giàu nội dung niche kcn.
+
+### Insight TRENDING (để bám trend lần sau)
+- "Trending now" của Threads VN phần lớn là **drama showbiz/idol** (Karina, PiaLinh,
+  Quincy, UPRIZE...) — KHÔNG hợp niche soi giá, ĐỪNG gượng bám.
+- Mảng khai thác được: chip hot "bán hàng online / tặng quà / Starbucks", và
+  **bài người dùng HỎI MUA/REVIEW sản phẩm** (vd "nên dùng kcn nào", "tìm mua...").
+  → Đây là MỎ VÀNG để comment dạo: người ta có nhu cầu thật, tư vấn đúng lúc dễ kéo
+  về profile nhất. Ưu tiên search "nên mua / review giúp / tìm mua + [sản phẩm]".
+
+### Giới hạn nhịp đăng (TRÁNH BỊ BÓP/KHÓA)
+- Mỗi phiên/ngày: tối đa ~1 bài + ~3 comment dạo. ĐỪNG đăng/comment dồn dập.
+- Cowork (Claude) KHÔNG chạy 24/7 → "đăng đều hằng ngày" = mỗi lần Danh mở máy gọi.
+  Auto thật cần AccessTrade duyệt hoặc Shopee Open API (đều đang chờ/chưa cấp).
+- Việc nên làm mỗi phiên: (1) check Activity, rep lại tương tác để đẩy reach;
+  (2) cập nhật trending; (3) 1 bài mới bám trend + tối đa 3 comment dạo bài "hỏi mua".
