@@ -172,3 +172,27 @@ Format thắng = **bóc phốt + mẹo**, KHÔNG quảng cáo lộ liễu. Luân
   Auto thật cần AccessTrade duyệt hoặc Shopee Open API (đều đang chờ/chưa cấp).
 - Việc nên làm mỗi phiên: (1) check Activity, rep lại tương tác để đẩy reach;
   (2) cập nhật trending; (3) 1 bài mới bám trend + tối đa 3 comment dạo bài "hỏi mua".
+
+### Bài đã đăng (cập nhật 2026-06-06, phiên 3)
+4 bài trên profile, xoay vòng chủ đề (đều format chuỗi 2/2, link ở comment):
+1. Torriden kem dưỡng (link thân — bài cũ, chưa tối ưu)
+2. Ghế công thái học Sihoo (bóc phốt) — s.shopee.vn/9pbeiWtYby
+3. Mẹo săn sale Shopee — s.shopee.vn/8fPh8nXnrf
+4. Mẹo chọn serum (đắt ≠ tốt, giảm sốc ≠ rẻ) — s.shopee.vn/8fPh8nXnrf
+Follower dao động ~372-373, ~3.5K view/profile. g14.hwn9 (tác giả bài săn sale)
+đã LIKE comment soi giá; +1 follow mới (trungranahihi._).
+
+### KẾT LUẬN về TikTok (đã kiểm tra 2026-06-06)
+- AccessTrade có "TIKTOK SHOP CPS" (HH upto 20%, Cost Per Sale) NHƯNG **Datafeed: No**
+  → tạo link thủ công từng sản phẩm, KHÔNG tự động hằng ngày được.
+- Vì vậy ĐỔI WEB sang "TikTok affiliate tự động" là BẤT KHẢ THI (web xây trên cơ chế
+  datafeed). TikTok CPS giống hệt Shopee Affiliate (gắn tay), mà Danh chưa có sản phẩm/
+  uy tín ở TikTok → đổi sang lúc này không lợi.
+- Danh CHƯA đăng ký affiliate TikTok nào (chỉ là campaign hiển thị trên AccessTrade).
+- AccessTrade Shopee đã treo >1 tuần chưa duyệt → web đang phụ thuộc sai chỗ.
+
+### HƯỚNG WEB ĐỀ XUẤT (chưa làm, chờ Danh đồng ý đụng code)
+Gỡ web khỏi datafeed AccessTrade → thêm lớp "sản phẩm tuyển chọn" (src/lib/picks.ts)
+chứa sản phẩm + link s.shopee.vn THẬT (Shopee Affiliate đang chạy, ăn tiền ngay).
+Hiển thị lên trang chủ/danh mục, nút Mua dùng link Shopee Affiliate (hết 404).
+→ Web chạy thật ngay, không chờ AccessTrade. Bắt đầu với 3 link đã có.
