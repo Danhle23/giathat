@@ -2,9 +2,11 @@ import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { SearchBar } from "@/components/SearchBar";
 import { ProductCard } from "@/components/ProductCard";
+import { PickCard } from "@/components/PickCard";
 import { Reveal } from "@/components/Reveal";
 import { getAllProducts, getFakeDeals } from "@/lib/catalog";
 import { CATEGORIES } from "@/lib/categories";
+import { PICKS } from "@/lib/picks";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +59,27 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Sản phẩm tuyển chọn — link Shopee Affiliate thật (ăn hoa hồng) */}
+      {PICKS.length > 0 && (
+        <section className="bg-white">
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            <Reveal>
+              <h2 className="font-display text-3xl font-semibold text-[#1d1d1f] sm:text-4xl">
+                Sản phẩm tuyển chọn
+              </h2>
+              <p className="mt-2 text-[17px] text-[#6e6e73]">
+                Vài món đáng tiền tụi mình đã soi giá &amp; chọn lọc — bấm là mua thẳng trên Shopee.
+              </p>
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {PICKS.map((p) => (
+                  <PickCard key={p.id} pick={p} />
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Fake-discount alert (only when history detects some) */}
       {fakeDeals.length > 0 && (
