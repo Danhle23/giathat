@@ -191,8 +191,17 @@ Follower dao động ~372-373, ~3.5K view/profile. g14.hwn9 (tác giả bài să
 - Danh CHƯA đăng ký affiliate TikTok nào (chỉ là campaign hiển thị trên AccessTrade).
 - AccessTrade Shopee đã treo >1 tuần chưa duyệt → web đang phụ thuộc sai chỗ.
 
-### HƯỚNG WEB ĐỀ XUẤT (chưa làm, chờ Danh đồng ý đụng code)
-Gỡ web khỏi datafeed AccessTrade → thêm lớp "sản phẩm tuyển chọn" (src/lib/picks.ts)
-chứa sản phẩm + link s.shopee.vn THẬT (Shopee Affiliate đang chạy, ăn tiền ngay).
-Hiển thị lên trang chủ/danh mục, nút Mua dùng link Shopee Affiliate (hết 404).
-→ Web chạy thật ngay, không chờ AccessTrade. Bắt đầu với 3 link đã có.
+### HƯỚNG WEB — ĐÃ LÀM (2026-06-06, commit e2b6b3a)
+✅ Gỡ phụ thuộc AccessTrade: thêm khu "Sản phẩm tuyển chọn" trên trang chủ.
+- src/lib/picks.ts — danh sách PICKS (sản phẩm chọn tay + link s.shopee.vn THẬT,
+  ăn hoa hồng). Hiện có: Torriden (8fPh8nXnrf), Sihoo M57 (9pbeiWtYby).
+- src/components/PickCard.tsx — thẻ bấm mua thẳng Shopee (rel nofollow sponsored).
+- Trang chủ có section ngay sau hero. Đã live, link affiliate hoạt động.
+→ Web giờ ĐÃ ăn tiền thật, không chờ AccessTrade.
+THÊM SẢN PHẨM: lấy link ở Shopee Affiliate (Hoa hồng Sản phẩm/Custom Link, Sub_id
+=SoiGia) rồi thêm 1 object vào mảng PICKS trong src/lib/picks.ts. KHÔNG cần DB/cron.
+
+### TODO web tiếp theo (khi muốn)
+- Thêm nhiều sản phẩm vào PICKS (đa danh mục: serum, son, chống nắng, đồ dùng).
+- Có thể hiện PICKS thêm ở trang /danh-muc/[slug] cho khớp danh mục.
+- Dài hạn: nếu Shopee cấp Open API → tự động hoá; còn không thì PICKS thủ công vẫn ổn.
